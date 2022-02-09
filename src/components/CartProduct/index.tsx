@@ -1,0 +1,45 @@
+import { BiTrash } from "react-icons/bi";
+import { formatPrice } from "~/lib/numbers";
+import { CartItemWithVariant } from "~/models/Cart";
+
+interface Props {
+  cartItem: CartItemWithVariant;
+}
+
+export function CartProduct(props: Props) {
+  const { cartItem } = props;
+  const { variant } = cartItem;
+
+  const handleRemoveClick = () => {
+    // TODO: Remove
+  };
+
+  return variant ? (
+    <div className="flex items-center gap-4 first:border-t border-b border-neutral-200">
+      <div className="flex justify-center items-center not-prose py-2">
+        <img
+          className="w-14 object-fill"
+          src={variant.cartImageSrc}
+          alt={variant.title}
+          title={variant.title}
+        />
+      </div>
+
+      <div className="flex-grow">
+        <p>
+          {cartItem.amount}x {variant.title}
+        </p>
+      </div>
+
+      <div className="">
+        <p>{formatPrice(variant.price * cartItem.amount)}</p>
+      </div>
+
+      <div className="">
+        <button className="p-4 hover:text-red-600" onClick={handleRemoveClick}>
+          <BiTrash />
+        </button>
+      </div>
+    </div>
+  ) : null;
+}

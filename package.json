@@ -2,21 +2,41 @@
   "name": "kaffedyret.mono",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "concurrently \"yarn dev:css\" \"next dev\"",
+    "dev:css": "tailwindcss -i ./src/styles/styles.css -o ./src/tailwind.css --watch",
+    "build": "yarn build:css && next build",
+    "build:css": "tailwindcss -i ./src/styles/styles.css -o ./src/tailwind.css --minify",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "npx sanity-codegen"
   },
   "dependencies": {
+    "@portabletext/react": "^1.0.2",
+    "classnames": "^2.3.1",
     "next": "12.0.10",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.1",
     "@types/node": "17.0.16",
     "@types/react": "17.0.39",
+    "autoprefixer": "^10.4.2",
+    "concurrently": "^7.0.0",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
+    "jsdom": "^19.0.0",
+    "postcss": "^8.4.6",
+    "prettier": "^2.5.1",
+    "sanity-codegen": "^0.9.8",
+    "tailwindcss": "^3.0.19",
     "typescript": "4.5.5"
   }
 }

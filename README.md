@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome to Kaffedyret
 
-## Getting Started
+Hello there, curious soul.
 
-First, run the development server:
+This is the source code for the website of Kaffedyret. The goal of having this repository public is to challenge myself to write easy-to-read, easy-to-understand, simple, and fast-paced code. A part of being a senior developer is understanding when to cut corners. In this project the aim is to spend as little time as possible developing so I have more to roast coffee.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## What the heck is Kaffedyret?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Kaffedyret is a nano coffee roastery based in Norway run by Christian and his wife Elisabeth. Christian is a senior frontend developer by day and coffee roaster by night. Oh, and Kaffedyret is Norwegian for "The Coffee Animal".
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Cool, so where can I buy coffee?
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Head on over to [Kaffedyret.no](https://kaffedyret.no)! Based on the progress of this project, you may or may not be able to order coffee through the website, but if you're really eager hit us up on social media:
+* [Instagram](https://www.instagram.com/kaffedyret_brenneri/)
+* [Facebook](https://www.facebook.com/Kaffedyret)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Enough chit-chat, I'm here because I'm a developer!
 
-## Learn More
+Woah there, cowboy. The stack I'm using is based on cutting-edge frameworks like [Remix](https://remix.run) hosted on [Vercel](https://vercel.com). I don't know what more I can tell ya. This project will develop (pun intended) as we go.
 
-To learn more about Next.js, take a look at the following resources:
+## Okay, you got me. I'm actually just a head hunter
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Cool. Thank you for checking out my code. I'm not looking for a new workplace though. So... Have a nice day!
