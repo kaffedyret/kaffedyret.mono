@@ -1,0 +1,32 @@
+{
+  "root": true,
+  "project": {
+    "name": "Kaffedyret"
+  },
+  "api": {
+    "projectId": "z6qypapd",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "barcode-input",
+    "order-documents"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "@sanity/vision",
+        "order-documents"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    }
+  ]
+}
