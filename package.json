@@ -2,10 +2,8 @@
   "name": "kaffedyret.mono",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"yarn dev:css\" \"next dev\"",
-    "dev:css": "tailwindcss -i ./src/styles/styles.css -o ./src/tailwind.css --watch",
-    "build": "yarn build:css && next build",
-    "build:css": "tailwindcss -i ./src/styles/styles.css -o ./src/tailwind.css --minify",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "codegen": "npx sanity-codegen"
