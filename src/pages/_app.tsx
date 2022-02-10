@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Kaffedyret</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
       <div className="grid grid-rows-app min-h-screen">
