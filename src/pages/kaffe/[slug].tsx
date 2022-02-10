@@ -3,6 +3,7 @@ import {
   GetStaticPropsContext,
   GetStaticPropsResult,
   InferGetStaticPropsType,
+  NextPage,
 } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -25,9 +26,9 @@ interface Props {
   slug: string;
 }
 
-export default function CoffeePage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
+const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
+  props
+) => {
   const { allVariants, slug, product } = props;
   const [currentSku, setSku] = useState<string | undefined>(
     product.defaultProductVariant.sku
@@ -109,7 +110,7 @@ export default function CoffeePage(
       </section>
     </div>
   );
-}
+};
 
 type PageParams = {
   slug: string;
@@ -147,3 +148,5 @@ export const getStaticProps = async ({
     },
   };
 };
+
+export default CoffeePage;

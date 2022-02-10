@@ -1,3 +1,4 @@
+import { GetStaticPropsResult, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
@@ -9,7 +10,9 @@ interface Props {
   products: Product[];
 }
 
-export default function CoffeesPage(props: Props) {
+const CoffeesPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
+  props
+) => {
   const { products } = props;
 
   return (
@@ -31,9 +34,11 @@ export default function CoffeesPage(props: Props) {
       </section>
     </div>
   );
-}
+};
 
-export async function getStaticProps(): Promise<{ props: Props }> {
+export const getStaticProps = async (): Promise<
+  GetStaticPropsResult<Props>
+> => {
   const products = await sanityClient.fetch<Product[]>(
     `*[_type == "product"] | order(order asc) { _id, title, slug, available, defaultProductVariant, blurb }`
   );
@@ -41,4 +46,6 @@ export async function getStaticProps(): Promise<{ props: Props }> {
   return {
     props: { products },
   };
-}
+};
+
+export default CoffeesPage;

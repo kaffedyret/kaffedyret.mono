@@ -1,9 +1,10 @@
+import { NextPage } from "next";
 import Head from "next/head";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { Kaffedyret } from "~/components/Kaffedyret";
 
-export default function Index() {
+const AboutPage: NextPage = () => {
   return (
     <div>
       <Head>
@@ -24,4 +25,6 @@ export default function Index() {
       </section>
     </div>
   );
-}
+};
+
+export default AboutPage;
