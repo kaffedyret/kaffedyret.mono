@@ -13,7 +13,7 @@ export function CartButton(props: Props) {
           <BiCart />
 
           {props.isNotEmpty && (
-            <span className="bg-blue-500 w-3 h-3 absolute -mt-3 -mr-5 rounded-full border-3 border-white" />
+            <span className="bg-blue-500 w-3 h-3 absolute -mt-3 -mr-5 rounded-full border-2 border-white" />
           )}
         </div>
       </a>
