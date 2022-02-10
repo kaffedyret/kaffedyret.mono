@@ -98,7 +98,7 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
                     iconRight={<BiPlus className="scale-125" />}
                     type="submit"
                   >
-                    Kjøp
+                    Legg i handlevogn
                   </Button>
                 </div>
               </div>
