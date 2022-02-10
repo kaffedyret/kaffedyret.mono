@@ -1,3 +1,5 @@
+import type { AxiosResponse } from "axios";
+import axios from "axios";
 import {
   GetStaticPathsResult,
   GetStaticPropsContext,
@@ -7,7 +9,7 @@ import {
 } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
@@ -17,12 +19,20 @@ import { formatPrice } from "~/lib/numbers";
 import { getAllVariantsFromProduct } from "~/lib/product";
 import sanityClient from "~/lib/sanity/sanityClient";
 import urlFor from "~/lib/sanity/urlFor";
+import { CartItem } from "~/models/Cart";
 import { Product, ProductVariant } from "~/models/schema.sanity";
+import { CartItemResponse } from "../api/cart/item";
 
 interface Props {
   product: Product;
   allVariants: ProductVariant[];
   slug: string;
+}
+
+interface FormProps {
+  amount: { value: string };
+  sku: { value: string };
+  slug: { value: string };
 }
 
 const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
@@ -39,6 +49,23 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
   const handleVariantChange = (e: any) => {
     setSku(e.target.value);
+  };
+
+  const handleFormSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & FormProps;
+    const amount = Number(target.amount.value);
+    const sku = String(target.sku.value);
+    const slug = String(target.slug.value);
+    const res = await axios.post<CartItem, AxiosResponse<CartItemResponse>>(
+      "/api/cart/item",
+      {
+        amount,
+        sku,
+        slug,
+      }
+    );
+    console.log(res.data);
   };
 
   return (
@@ -72,9 +99,9 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
               {product.body?.nb && <TextBlock>{product.body.nb}</TextBlock>}
             </article>
 
-            <form method="post">
+            <form method="post" onSubmit={handleFormSubmit}>
               <div className="grid grid-cols-1 grid-rows-4 xs:grid-cols-2 sm:grid-rows-2 gap-4 pt-10">
-                <p className="sm:col-span-2 text-3xl font-bold">
+                <p className="xs:col-span-2 text-3xl font-bold">
                   {formatPrice(currentPrice)}
                 </p>
 
@@ -92,7 +119,7 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
                   ))}
                 </select>
 
-                <div className="flex">
+                <div className="flex xs:col-span-2">
                   <Button
                     iconRight={<BiPlus className="scale-125" />}
                     type="submit"
@@ -102,7 +129,7 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
                 </div>
               </div>
 
-              <input hidden name="slug" value={slug} />
+              <input hidden name="slug" value={slug} readOnly />
             </form>
           </div>
         </div>
