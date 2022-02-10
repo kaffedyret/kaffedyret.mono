@@ -26,6 +26,8 @@ export default {
       title: "Available",
       type: "boolean",
       initialValue: true,
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Default variant",
@@ -99,7 +101,7 @@ export default {
     select: {
       title: "title",
       manufactor: "manufactor.title",
-      media: "defaultProductVariant.images[0]",
+      media: "defaultProductVariant.image",
     },
   },
 };

@@ -21,7 +21,7 @@ export function CartProduct(props: Props) {
       <div className="flex justify-center items-center not-prose py-2">
         <Image
           className="w-14 object-fill"
-          src={urlFor(variant.images[0]).width(56).url()}
+          src={urlFor(variant.image).width(56).url()}
           alt={variant.title}
           title={variant.title}
           width={56}

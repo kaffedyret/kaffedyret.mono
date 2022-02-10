@@ -14,6 +14,8 @@ export default {
       title: "Weight in grams",
       name: "grams",
       type: "number",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Price",
@@ -30,29 +32,14 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      title: "Taxable",
-      name: "taxable",
-      type: "boolean",
-    },
-    {
-      name: "images",
-      title: "Images",
-      type: "array",
-      of: [
-        {
-          type: "image",
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      name: "image",
+      title: "Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
-    },
-    {
-      title: "Bar code",
-      name: "barcode",
-      type: "barcode",
     },
   ],
 };

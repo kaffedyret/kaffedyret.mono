@@ -63,7 +63,7 @@ export interface Product extends SanityDocument {
    *
    *
    */
-  available?: boolean;
+  available: boolean;
 
   /**
    * Default variant — `productVariant`
@@ -276,7 +276,7 @@ export type ProductVariant = {
    *
    *
    */
-  grams?: number;
+  grams: number;
 
   /**
    * Price — `number`
@@ -293,39 +293,16 @@ export type ProductVariant = {
   sku: string;
 
   /**
-   * Taxable — `boolean`
+   * Image — `image`
    *
    *
    */
-  taxable?: boolean;
-
-  /**
-   * Images — `array`
-   *
-   *
-   */
-  images: Array<
-    SanityKeyed<{
-      _type: "image";
-      asset: SanityReference<SanityImageAsset>;
-      crop?: SanityImageCrop;
-      hotspot?: SanityImageHotspot;
-    }>
-  >;
-
-  /**
-   * Bar code — `barcode`
-   *
-   *
-   */
-  barcode?: Barcode;
+  image: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
 };
 
 export type Documents = Product | Vendor | Category;
-
-/**
- * This interface is a stub. It was referenced in your sanity schema but
- * the definition was not actually found. Future versions of
- * sanity-codegen will let you type this explicity.
- */
-type Barcode = any;

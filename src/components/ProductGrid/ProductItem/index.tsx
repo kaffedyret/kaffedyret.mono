@@ -31,7 +31,7 @@ export function ProductItem(props: Props) {
         <ProductLinkWrapper>
           <Image
             className="w-full h-full object-center object-cover lg:w-full lg:h-full rounded-lg"
-            src={urlFor(product.defaultProductVariant.images[0])
+            src={urlFor(product.defaultProductVariant.image)
               .width(imageWidth)
               .height(imageHeight)
               .url()}
