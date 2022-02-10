@@ -10,8 +10,4 @@ export interface CartItemWithVariant extends CartItem {
   variant?: ProductVariant;
 }
 
-export interface Cart {
-  items?: CartItem[];
-}
-
-export type CookiesCart = CartItem[];
+export type Cart = CartItem[];
