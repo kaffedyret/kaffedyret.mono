@@ -65,7 +65,8 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
         slug,
       }
     );
-    console.log(res.data);
+
+    // TODO: Add some sort of success or error state
   };
 
   return (
