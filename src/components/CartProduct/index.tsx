@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BiTrash } from "react-icons/bi";
 import { formatPrice } from "~/lib/numbers";
 import { CartItemWithVariant } from "~/models/Cart";
@@ -17,11 +18,12 @@ export function CartProduct(props: Props) {
   return variant ? (
     <div className="flex items-center gap-4 first:border-t border-b border-neutral-200">
       <div className="flex justify-center items-center not-prose py-2">
-        <img
+        <Image
           className="w-14 object-fill"
           src={variant.cartImageSrc}
           alt={variant.title}
           title={variant.title}
+          width={56}
         />
       </div>
 

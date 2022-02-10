@@ -1,8 +1,9 @@
 import Link from "next/link";
-import logo from "../../assets/images/kaffedyret_icon_rounded.svg";
+import logo from "~/assets/images/kaffedyret_icon_rounded.svg";
 import { MobileNav } from "./MobileNav";
 import { Nav } from "./Nav";
 import { CartButton } from "./Nav/CartButton";
+import Image from "next/image";
 
 interface Props {
   isCartNotEmpty?: boolean;
@@ -23,11 +24,13 @@ export function Header(props: Props) {
           <div className="flex justify-center items-center hover:drop-shadow-lg transition-all will-change-transform  ease-in-out duration-200 hover:scale-105">
             <Link href="/">
               <a>
-                <img
+                <Image
                   className="w-12 h-12"
                   src={logo}
                   alt="Kaffedyret logo"
                   title="Kaffedyret"
+                  width={48}
+                  height={48}
                 />
               </a>
             </Link>

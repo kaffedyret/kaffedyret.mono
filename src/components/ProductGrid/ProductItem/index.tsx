@@ -1,15 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
+import { BiRightArrowAlt } from "react-icons/bi";
 import { Button } from "~/components/Button";
 import { formatPrice } from "~/lib/numbers";
-import { ExtendedProduct } from "~/models/ExtendedProduct";
-import { BiRightArrowAlt } from "react-icons/bi";
+import urlFor from "~/lib/sanity/urlFor";
+import { Product } from "~/models/schema.sanity";
 interface Props {
-  product: ExtendedProduct;
+  product: Product;
 }
 
 export function ProductItem(props: Props) {
   const { product } = props;
   const isAvailable = product.available;
+  const imageWidth = 608;
+  const imageHeight = 608;
 
   const ProductLinkWrapper = ({ children }: { children: any }): JSX.Element => {
     return isAvailable ? (
@@ -25,11 +29,17 @@ export function ProductItem(props: Props) {
     <div className="flex flex-col bg-white rounded-lg p-2 pb-0 drop-shadow-sm">
       <div className="not-prose">
         <ProductLinkWrapper>
-          <img
+          <Image
             className="w-full h-full object-center object-cover lg:w-full lg:h-full rounded-lg"
-            src={product.cardImageSrc}
+            src={urlFor(product.defaultProductVariant.images[0])
+              .width(imageWidth)
+              .height(imageHeight)
+              .url()}
             alt={product.title}
             title={product.title}
+            width={imageWidth}
+            height={imageHeight}
+            layout="responsive"
           />
         </ProductLinkWrapper>
       </div>
