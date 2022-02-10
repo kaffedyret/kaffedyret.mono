@@ -20,7 +20,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      heading: ["OmnesCyrillic", "sans-serif"],
+      heading: ["omnes-pro", "sans-serif"],
       sans: ["Sofia Pro Soft", "sans-serif"],
       jumble: ["Jumble", "sans-serif"],
     },
