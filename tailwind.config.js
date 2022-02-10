@@ -20,9 +20,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      heading: ["omnes-cyrillic", "sans-serif"],
-      sans: ["sofia-pro-soft", "sans-serif"],
-      jumble: ["jumble", "sans-serif"],
+      heading: ["OmnesCyrillic", "sans-serif"],
+      sans: ["Sofia Pro Soft", "sans-serif"],
+      jumble: ["Jumble", "sans-serif"],
     },
   },
   plugins: [

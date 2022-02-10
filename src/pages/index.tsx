@@ -11,7 +11,6 @@ const Home: NextPage = () => {
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="stylesheet" href="https://use.typekit.net/agh5suv.css" />
-        <link rel="stylesheet" href="https://use.typekit.net/agh5suv.css" />
         <link
           rel="apple-touch-icon"
           href="/apple-touch-icon.png"
