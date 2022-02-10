@@ -17,12 +17,11 @@ import { formatPrice } from "~/lib/numbers";
 import { getAllVariantsFromProduct } from "~/lib/product";
 import sanityClient from "~/lib/sanity/sanityClient";
 import urlFor from "~/lib/sanity/urlFor";
-import { ExtendedVariant } from "~/models/ExtendedProductVariant";
-import { Product } from "~/models/schema.sanity";
+import { Product, ProductVariant } from "~/models/schema.sanity";
 
 interface Props {
   product: Product;
-  allVariants: ExtendedVariant[];
+  allVariants: ProductVariant[];
   slug: string;
 }
 

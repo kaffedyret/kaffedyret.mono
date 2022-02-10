@@ -1,12 +1,4 @@
-import { ExtendedProduct } from "~/models/ExtendedProduct";
-import {
-  createExtendedVariantFromVariant,
-  ExtendedVariant,
-} from "~/models/ExtendedProductVariant";
+import { Product, ProductVariant } from "~/models/schema.sanity";
 
-export const getAllVariantsFromProduct = (
-  product: ExtendedProduct
-): ExtendedVariant[] =>
-  [product.defaultProductVariant]
-    .concat(product.variants || [])
-    .map(createExtendedVariantFromVariant);
+export const getAllVariantsFromProduct = (product: Product): ProductVariant[] =>
+  [product.defaultProductVariant].concat(product.variants || []);

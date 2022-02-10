@@ -1,5 +1,5 @@
 import { Cart, CartItem, CartItemWithVariant } from "~/models/Cart";
-import { ExtendedProduct } from "~/models/ExtendedProduct";
+import { Product } from "~/models/schema.sanity";
 import { getAllVariantsFromProduct } from "./product";
 
 export const isCartNotEmpty = (cart?: Cart): boolean =>
@@ -33,13 +33,13 @@ export const addItemToCart = (item: CartItem, cart: Cart): Cart => {
 
 export const getCartItemsWithProduct = (
   cart: Cart,
-  products: ExtendedProduct[]
+  products: Product[]
 ): Array<CartItemWithVariant> => {
   if (!cart?.items || cart.items.length === 0) return [];
 
   return cart.items.map((cartItem) => {
     const allVariants = getAllVariantsFromProduct(
-      products.find((p) => p.slug.current === cartItem.slug) as ExtendedProduct
+      products.find((p) => p.slug.current === cartItem.slug) as Product
     );
 
     return {

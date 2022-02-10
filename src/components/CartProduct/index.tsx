@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { BiTrash } from "react-icons/bi";
 import { formatPrice } from "~/lib/numbers";
+import urlFor from "~/lib/sanity/urlFor";
 import { CartItemWithVariant } from "~/models/Cart";
 
 interface Props {
@@ -20,7 +21,7 @@ export function CartProduct(props: Props) {
       <div className="flex justify-center items-center not-prose py-2">
         <Image
           className="w-14 object-fill"
-          src={variant.cartImageSrc}
+          src={urlFor(variant.images[0]).width(56).url()}
           alt={variant.title}
           title={variant.title}
           width={56}

@@ -1,4 +1,3 @@
-import { ExtendedVariant } from "./ExtendedProductVariant";
 import type { ProductVariant } from "./schema.sanity";
 
 export interface CartItem {
@@ -8,7 +7,7 @@ export interface CartItem {
 }
 
 export interface CartItemWithVariant extends CartItem {
-  variant?: ExtendedVariant;
+  variant?: ProductVariant;
 }
 
 export interface Cart {
