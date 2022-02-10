@@ -4,6 +4,7 @@ import {
   GetStaticPropsResult,
   InferGetStaticPropsType,
 } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
@@ -42,6 +43,10 @@ export default function CoffeePage(
 
   return (
     <div>
+      <Head>
+        <title>{product.title}</title>
+      </Head>
+
       <Breadcrumbs>
         <BreadcrumbItem href="/kaffe" title="Våre kaffer" />
         <BreadcrumbItem title={product.title} isCurrent />

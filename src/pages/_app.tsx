@@ -2,18 +2,25 @@ import "../styles/styles.css";
 import type { AppProps } from "next/app";
 import { Header } from "~/components/Header";
 import { Footer } from "~/components/Footer";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="grid grid-rows-app min-h-screen">
-      <Header isCartNotEmpty={true} />
+    <>
+      <Head>
+        <title>Kaffedyret</title>
+      </Head>
 
-      <section className="bg-slate-100">
-        <Component {...pageProps} />
-      </section>
+      <div className="grid grid-rows-app min-h-screen">
+        <Header isCartNotEmpty={true} />
 
-      <Footer />
-    </div>
+        <section className="bg-slate-100">
+          <Component {...pageProps} />
+        </section>
+
+        <Footer />
+      </div>
+    </>
   );
 }
 

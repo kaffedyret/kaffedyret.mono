@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { Kaffedyret } from "~/components/Kaffedyret";
@@ -5,6 +6,10 @@ import { Kaffedyret } from "~/components/Kaffedyret";
 export default function Index() {
   return (
     <div>
+      <Head>
+        <title>Om oss</title>
+      </Head>
+
       <Breadcrumbs>
         <BreadcrumbItem title="Om oss" isCurrent />
       </Breadcrumbs>

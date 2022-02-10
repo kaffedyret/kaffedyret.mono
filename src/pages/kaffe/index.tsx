@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { ProductGrid } from "~/components/ProductGrid";
@@ -13,6 +14,10 @@ export default function CoffeesPage(props: Props) {
 
   return (
     <div>
+      <Head>
+        <title>Våre kaffer</title>
+      </Head>
+
       <Breadcrumbs>
         <BreadcrumbItem title="Våre kaffer" isCurrent />
       </Breadcrumbs>
