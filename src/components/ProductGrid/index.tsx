@@ -1,8 +1,8 @@
-import { ExtendedProduct } from "~/models/ExtendedProduct";
+import { Product } from "~/models/schema.sanity";
 import { ProductItem } from "./ProductItem";
 
 interface Props {
-  products: ExtendedProduct[];
+  products: Product[];
 }
 
 export function ProductGrid(props: Props) {
