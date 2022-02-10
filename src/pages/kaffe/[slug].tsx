@@ -47,6 +47,8 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   const imageWidth = 608;
   const imageHeight = 608;
 
+  axios.get("/api/cart").then(console.log);
+
   const handleVariantChange = (e: any) => {
     setSku(e.target.value);
   };

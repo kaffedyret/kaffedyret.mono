@@ -13,3 +13,5 @@ export interface CartItemWithVariant extends CartItem {
 export interface Cart {
   items?: CartItem[];
 }
+
+export type CookiesCart = CartItem[];
