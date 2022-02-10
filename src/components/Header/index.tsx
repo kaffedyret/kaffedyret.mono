@@ -4,6 +4,7 @@ import { MobileNav } from "./MobileNav";
 import { Nav } from "./Nav";
 import { CartButton } from "./Nav/CartButton";
 import Image from "next/image";
+import { Kaffedyret } from "../Kaffedyret";
 
 interface Props {
   isCartNotEmpty?: boolean;
@@ -14,7 +15,7 @@ export function Header(props: Props) {
     <header className="sticky top-0 bg-white drop-shadow-lg z-50">
       <div className="relative">
         <nav
-          className="container-narrow grid grid-cols-3 md:grid-cols-header gap-4 md:gap-12 py-2 px-2"
+          className="container-narrow grid grid-cols-3 md:grid-cols-header gap-4 py-2 px-2"
           role="navigation"
         >
           <div className="md:hidden">
@@ -23,7 +24,7 @@ export function Header(props: Props) {
 
           <div className="flex justify-center items-center hover:drop-shadow-lg transition-all will-change-transform  ease-in-out duration-200 hover:scale-105">
             <Link href="/">
-              <a>
+              <a className="flex items-center gap-8">
                 <Image
                   className="w-12 h-12"
                   src={logo}
@@ -32,6 +33,8 @@ export function Header(props: Props) {
                   width={48}
                   height={48}
                 />
+
+                <Kaffedyret className="hidden md:block text-3xl" />
               </a>
             </Link>
           </div>
