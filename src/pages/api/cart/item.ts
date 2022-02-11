@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
-import { addItemToCart, removeItemToCart } from "~/lib/cart";
+import { addItemToCart, removeItemFromCart } from "~/lib/cart";
 import { cartConfig } from "~/lib/cookies";
 import { Cart, CartItem } from "~/models/Cart";
 
@@ -26,7 +26,7 @@ export default function handler(
       } else if (req.method === "DELETE") {
         const cart = cookiesCart ? JSON.parse(cookiesCart) : undefined;
         const cartItem: CartItem = req.body;
-        const updatedCart = removeItemToCart(cartItem, cart);
+        const updatedCart = removeItemFromCart(cartItem, cart);
 
         // If there are still items in the cart
         if (updatedCart) {

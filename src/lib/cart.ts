@@ -1,4 +1,4 @@
-import { Cart, CartItem, CartItemWithVariant } from "~/models/Cart";
+import { Cart, CartItem, ExtendedCartItem } from "~/models/Cart";
 import { Product } from "~/models/schema.sanity";
 import { getAllVariantsFromProduct } from "./product";
 
@@ -25,7 +25,7 @@ export const addItemToCart = (item: CartItem, cart?: Cart): Cart => {
   });
 };
 
-export const removeItemToCart = (item: CartItem, cart?: Cart): Cart | null => {
+export const removeItemFromCart = (item: CartItem, cart?: Cart): Cart | null => {
   // If cart is empty
   if (!cart || cart.length === 0) {
     return null;
@@ -48,20 +48,19 @@ export const removeItemToCart = (item: CartItem, cart?: Cart): Cart | null => {
   return updatedCart.length > 0 ? updatedCart : null;
 };
 
-export const getCartItemsWithProduct = (
+export const getExtendedCartItems = (
   cart: Cart,
   products: Product[]
-): Array<CartItemWithVariant> => {
+): Array<ExtendedCartItem> => {
   if (!cart || cart.length === 0) return [];
 
   return cart.map((cartItem) => {
-    const allVariants = getAllVariantsFromProduct(
-      products.find((p) => p.slug.current === cartItem.slug) as Product
-    );
+    const product = products.find(
+      (p) => p.slug.current === cartItem.slug
+    ) as Product;
+    const allVariants = getAllVariantsFromProduct(product);
+    const variant = allVariants.find((p) => p.sku === cartItem.sku);
 
-    return {
-      ...cartItem,
-      variant: allVariants.find((p) => p.sku === cartItem.sku),
-    };
+    return { ...cartItem, product, variant };
   });
 };
