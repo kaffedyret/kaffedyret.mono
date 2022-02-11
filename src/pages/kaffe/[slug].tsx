@@ -161,14 +161,10 @@ export const getStaticProps = async ({
 }: GetStaticPropsContext<PageParams>): Promise<GetStaticPropsResult<Props>> => {
   const { slug } = params!;
 
-  console.log("/kaffe/[slug] slug:", slug);
-
   const [product] = await sanityClient.fetch<Product[]>(
     `*[_type == "product" && slug.current == $slug] | order(order asc) { _id, title, body, slug, available, defaultProductVariant, variants, blurb }`,
     { slug }
   );
-
-  console.log("/kaffe/[slug] product:", product);
 
   const allVariants = getAllVariantsFromProduct(product);
 
