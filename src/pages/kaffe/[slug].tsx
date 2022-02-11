@@ -165,6 +165,9 @@ export const getStaticProps = async ({
     `*[_type == "product" && slug.current == $slug] | order(order asc) { _id, title, body, slug, available, defaultProductVariant, variants, blurb }`,
     { slug }
   );
+
+  console.log("/kaffe/[slug]", product);
+
   const allVariants = getAllVariantsFromProduct(product);
 
   return {
