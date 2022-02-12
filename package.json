@@ -12,13 +12,16 @@
     "@portabletext/react": "^1.0.2",
     "@sanity/client": "^3.0.4",
     "@sanity/image-url": "^1.0.1",
+    "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.25.0",
     "classnames": "^2.3.1",
     "next": "12.0.10",
-    "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "stripe": "^8.202.0",
+    "swr": "^1.2.1",
+    "use-shopping-cart": "^3.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",

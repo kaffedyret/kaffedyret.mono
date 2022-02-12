@@ -4,14 +4,13 @@ import {
   NextPage,
 } from "next";
 import Head from "next/head";
-import nookies from "nookies";
+import type { Product as CartProduct } from "use-shopping-cart/core";
+import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
-import { CartProduct } from "~/components/CartProduct";
-import { getExtendedCartItems } from "~/lib/cart";
-import { cartConfig } from "~/lib/cookies";
+import { Button } from "~/components/Button";
+import { CartSummaryItem } from "~/components/CartSummaryItem";
 import sanityClient from "~/lib/sanity/sanityClient";
-import { Cart } from "~/models/Cart";
 import { Product } from "~/models/schema.sanity";
 
 interface Props {
@@ -22,9 +21,16 @@ const CartPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = (props) => {
   const { products } = props;
-  const { cart: cookiesCart } = nookies.get(null, cartConfig);
-  const cart: Cart | null = cookiesCart ? JSON.parse(cookiesCart) : null;
-  const extendedCartItems = cart ? getExtendedCartItems(cart, products) : null;
+  const {
+    formattedTotalPrice,
+    cartCount,
+    clearCart,
+    cartDetails,
+    redirectToCheckout,
+  } = useShoppingCart();
+  const cartProducts = Object.values(
+    cartDetails as Record<string, CartProduct>
+  );
 
   return (
     <div>
@@ -40,12 +46,10 @@ const CartPage: NextPage<
         <div className="container-narrow prose lg:prose-lg xl:prose-xl">
           <h1>Handlevogn</h1>
 
-          {extendedCartItems ? (
-            <div>
-              {extendedCartItems.map((cartItem) => (
-                <CartProduct cartItem={cartItem} key={cartItem.sku} />
-              ))}
-            </div>
+          {cartProducts && cartProducts.length > 0 ? (
+            cartProducts.map((i) => (
+              <CartSummaryItem cartProduct={i} key={i.id} />
+            ))
           ) : (
             <p>Handlevognen er tom.</p>
           )}

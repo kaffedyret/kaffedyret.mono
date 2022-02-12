@@ -1,5 +1,3 @@
-import type { AxiosResponse } from "axios";
-import axios from "axios";
 import {
   GetStaticPathsResult,
   GetStaticPropsContext,
@@ -11,6 +9,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { SyntheticEvent, useState } from "react";
 import { BiPlus } from "react-icons/bi";
+import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { Button } from "~/components/Button";
@@ -19,9 +18,7 @@ import { formatPrice } from "~/lib/numbers";
 import { getAllVariantsFromProduct } from "~/lib/product";
 import sanityClient from "~/lib/sanity/sanityClient";
 import urlFor from "~/lib/sanity/urlFor";
-import { CartItem } from "~/models/Cart";
 import { Product, ProductVariant } from "~/models/schema.sanity";
-import { CartItemResponse } from "../api/cart/item";
 
 interface Props {
   product: Product;
@@ -39,13 +36,17 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   props
 ) => {
   const { allVariants, slug, product } = props;
-  const [currentSku, setSku] = useState<string | undefined>(
+  const [currentSku, setSku] = useState<string>(
     product.defaultProductVariant.sku
   );
-  const currentVariant = allVariants.find((v) => v.sku === currentSku);
-  const currentPrice = currentVariant?.price;
+  const currentVariant =
+    allVariants.find((v) => v.sku === currentSku) ||
+    product.defaultProductVariant;
+  const currentPrice = currentVariant.price;
   const imageWidth = 608;
   const imageHeight = 608;
+
+  const { addItem } = useShoppingCart();
 
   const handleVariantChange = (e: any) => {
     setSku(e.target.value);
@@ -57,16 +58,18 @@ const CoffeePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
     const amount = Number(target.amount.value);
     const sku = String(target.sku.value);
     const slug = String(target.slug.value);
-    const res = await axios.post<CartItem, AxiosResponse<CartItemResponse>>(
-      "/api/cart/item",
-      {
-        amount,
-        sku,
-        slug,
-      }
-    );
 
-    // TODO: Add some sort of success or error state
+    addItem(
+      {
+        id: sku,
+        name: `${product.title} - ${currentVariant.title}`,
+        // description: "",
+        price: currentVariant.price,
+        currency: "NOK",
+        image: urlFor(currentVariant.image).width(56).height(56).url(),
+      },
+      { count: amount }
+    );
   };
 
   return (
