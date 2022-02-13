@@ -8,8 +8,7 @@ import type { Product as CartProduct } from "use-shopping-cart/core";
 import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
-import { Button } from "~/components/Button";
-import { CartSummaryItem } from "~/components/CartSummaryItem";
+import { CartSummary } from "~/components/CartSummary";
 import sanityClient from "~/lib/sanity/sanityClient";
 import { Product } from "~/models/schema.sanity";
 
@@ -21,16 +20,12 @@ const CartPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = (props) => {
   const { products } = props;
-  const {
-    formattedTotalPrice,
-    cartCount,
-    clearCart,
-    cartDetails,
-    redirectToCheckout,
-  } = useShoppingCart();
+  const { cartDetails } = useShoppingCart();
   const cartProducts = Object.values(
     cartDetails as Record<string, CartProduct>
   );
+
+  console.log(useShoppingCart());
 
   return (
     <div>
@@ -46,13 +41,7 @@ const CartPage: NextPage<
         <div className="container-narrow prose lg:prose-lg xl:prose-xl">
           <h1>Handlevogn</h1>
 
-          {cartProducts && cartProducts.length > 0 ? (
-            cartProducts.map((i) => (
-              <CartSummaryItem cartProduct={i} key={i.id} />
-            ))
-          ) : (
-            <p>Handlevognen er tom.</p>
-          )}
+          <CartSummary cartProducts={cartProducts} />
         </div>
       </section>
     </div>
