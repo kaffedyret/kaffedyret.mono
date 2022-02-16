@@ -1,4 +1,4 @@
 export const priceConfig = {
-  currency: "nok",
+  currency: "NOK",
   language: "nb-NO",
 };

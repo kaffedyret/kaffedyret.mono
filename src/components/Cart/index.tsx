@@ -11,6 +11,7 @@ export function Cart(props: Props) {
       cartMode="checkout-session"
       stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""}
       currency="NOK"
+      language="NO"
     >
       {props.children}
     </CartProvider>
