@@ -27,9 +27,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     line_items = validateCartItems(inventory, cartProducts);
   } catch (error) {
-    console.error(error);
     return res.status(422).json({
       message: "Some of the items in your cart are invalid.",
+      error,
     });
   }
 
@@ -47,9 +47,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       line_items,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({
       message: "While communicating with Stripe, we encountered an error.",
+      error
     });
   }
 
