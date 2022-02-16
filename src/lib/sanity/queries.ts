@@ -5,6 +5,7 @@ export const productsQuery = `*[_type == "product"] | order(order asc) {
   stripeProductId,
   available,
   defaultProductVariant,
+  variants,
   blurb,
 }`;
 

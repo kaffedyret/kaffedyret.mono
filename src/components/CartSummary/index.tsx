@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BiRightArrowAlt } from "react-icons/bi";
 import type { Product as CartProduct } from "use-shopping-cart/core";
 import { useShoppingCart } from "use-shopping-cart/react";
@@ -5,17 +6,24 @@ import { Button } from "../Button";
 import { CartSummaryItem } from "./CartSummaryItem";
 import { CartSummaryTotal } from "./CartSummaryTotal";
 
-interface Props {
-  cartProducts: CartProduct[];
-}
-
-export function CartSummary(props: Props) {
-  const { cartProducts } = props;
-  const { redirectToCheckout } = useShoppingCart();
+export function CartSummary() {
+  const { cartDetails, redirectToCheckout } = useShoppingCart();
+  const cartProducts = Object.values(
+    cartDetails as Record<string, CartProduct>
+  );
 
   const handleGoToCheckoutClick = async () => {
-    // TODO: Pass sessionId
-    await redirectToCheckout();
+    axios
+      .post("/api/cart/checkout", cartDetails)
+      .then((res) => {
+        const { sessionId } = res.data;
+        
+        // TODO: Make this work. We're so close now!
+        redirectToCheckout(sessionId);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return cartProducts && cartProducts.length > 0 ? (
