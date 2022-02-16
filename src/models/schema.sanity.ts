@@ -59,6 +59,13 @@ export interface Product extends SanityDocument {
   slug: { _type: "slug"; current: string };
 
   /**
+   * Stripe Product ID — `string`
+   *
+   *
+   */
+  stripeProductId: string;
+
+  /**
    * Available — `boolean`
    *
    *
@@ -80,6 +87,13 @@ export interface Product extends SanityDocument {
   variants?: Array<SanityKeyed<ProductVariant>>;
 
   /**
+   * Categories — `array`
+   *
+   *
+   */
+  categories?: Array<SanityKeyedReference<Category>>;
+
+  /**
    * Tags — `array`
    *
    *
@@ -99,13 +113,6 @@ export interface Product extends SanityDocument {
    *
    */
   blurb: LocaleString;
-
-  /**
-   * Categories — `array`
-   *
-   *
-   */
-  categories?: Array<SanityKeyedReference<Category>>;
 
   /**
    * Body — `localeBlockContent`
@@ -279,18 +286,18 @@ export type ProductVariant = {
   grams: number;
 
   /**
-   * Price — `number`
-   *
-   *
-   */
-  price: number;
-
-  /**
    * SKU — `string`
    *
    *
    */
   sku: string;
+
+  /**
+   * Stripe Price ID — `string`
+   *
+   *
+   */
+  stripePriceId: string;
 
   /**
    * Image — `image`

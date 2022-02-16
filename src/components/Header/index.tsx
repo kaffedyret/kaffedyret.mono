@@ -1,16 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
+import { useShoppingCart } from "use-shopping-cart/react";
 import logo from "~/assets/images/kaffedyret_icon_rounded.svg";
+import { Kaffedyret } from "../Kaffedyret";
 import { MobileNav } from "./MobileNav";
 import { Nav } from "./Nav";
 import { CartButton } from "./Nav/CartButton";
-import Image from "next/image";
-import { Kaffedyret } from "../Kaffedyret";
 
-interface Props {
-  isCartNotEmpty?: boolean;
-}
+export function Header() {
+  const { cartCount } = useShoppingCart();
+  const isCartNotEmpty = cartCount > 0;
 
-export function Header(props: Props) {
   return (
     <header className="sticky top-0 bg-white drop-shadow-lg z-50">
       <div className="relative">
@@ -44,7 +44,7 @@ export function Header(props: Props) {
           </div>
 
           <div className="flex justify-end md:justify-center items-center -my-2">
-            <CartButton isNotEmpty={props.isCartNotEmpty} />
+            <CartButton isNotEmpty={isCartNotEmpty} />
           </div>
         </nav>
       </div>

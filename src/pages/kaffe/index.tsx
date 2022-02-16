@@ -1,19 +1,27 @@
-import { GetStaticPropsResult, InferGetStaticPropsType, NextPage } from "next";
+import {
+  GetServerSidePropsResult,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 import Head from "next/head";
+import Stripe from "stripe";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { ProductGrid } from "~/components/ProductGrid";
+import { productsQuery } from "~/lib/sanity/queries";
 import sanityClient from "~/lib/sanity/sanityClient";
+import stripe from "~/lib/stripe";
 import type { Product } from "~/models/schema.sanity";
 
 interface Props {
+  prices: Stripe.Price[];
   products: Product[];
 }
 
-const CoffeesPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
-  props
-) => {
-  const { products } = props;
+const CoffeesPage: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = (props) => {
+  const { prices, products } = props;
 
   return (
     <div>
@@ -29,22 +37,23 @@ const CoffeesPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
         <div className="container-narrow prose lg:prose-lg xl:prose-xl">
           <h1>Våre kaffer</h1>
 
-          <ProductGrid products={products} />
+          <ProductGrid products={products} prices={prices} />
         </div>
       </section>
     </div>
   );
 };
 
-export const getStaticProps = async (): Promise<
-  GetStaticPropsResult<Props>
+export const getServerSideProps = async (): Promise<
+  GetServerSidePropsResult<Props>
 > => {
-  const products = await sanityClient.fetch<Product[]>(
-    `*[_type == "product"] | order(order asc) { _id, title, slug, available, defaultProductVariant, blurb }`
-  );
+  const [products, { data: prices }] = await Promise.all([
+    sanityClient.fetch<Product[]>(productsQuery),
+    stripe.prices.list(),
+  ]);
 
   return {
-    props: { products },
+    props: { prices, products },
   };
 };
 
