@@ -17,8 +17,11 @@ export function CartSummaryItem(props: Props) {
   };
 
   return cartProduct ? (
-    <div className="flex items-center gap-4 first:border-t border-b border-neutral-200">
-      <div className="flex justify-center items-center not-prose py-2">
+    <div className="grid grid-cols-cart-summary-item sm:grid-cols-sm-cart-summary-item grid-template-areas-cart-summary-item items-center gap-x-4 first:border-t border-b border-neutral-200 not-prose">
+      <div
+        className="flex justify-center items-center py-2"
+        style={{ gridArea: "image" }}
+      >
         <Image
           className="w-14 object-fill"
           src={cartProduct.image || ""} // TODO: Find fallback image
@@ -29,17 +32,19 @@ export function CartSummaryItem(props: Props) {
         />
       </div>
 
-      <div className="flex-grow">
+      <div style={{ gridArea: "title" }}>
         <p>
           {cartProduct.name} ({cartProduct.quantity} stk.)
         </p>
       </div>
 
-      <div className="">
-        <p>{formatPrice(cartProduct.price * cartProduct.quantity)}</p>
+      <div style={{ gridArea: "price" }}>
+        <p className="">
+          {formatPrice(cartProduct.price * cartProduct.quantity)}
+        </p>
       </div>
 
-      <div className="">
+      <div style={{ gridArea: "action" }}>
         <button className="p-4 hover:text-red-600" onClick={handleRemoveClick}>
           <BiTrash />
         </button>
