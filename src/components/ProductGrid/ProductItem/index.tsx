@@ -1,19 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
+import Stripe from "stripe";
+import { formatCurrencyString } from "use-shopping-cart";
 import { Button } from "~/components/Button";
-import { formatPrice } from "~/lib/numbers";
 import urlFor from "~/lib/sanity/urlFor";
+import { priceConfig } from "~/lib/stripe/config";
 import { Product } from "~/models/schema.sanity";
+
 interface Props {
+  price?: Stripe.Price;
   product: Product;
 }
 
+const IMAGE_WIDTH = 608;
+const IMAGE_HEIGHT = 608;
+
 export function ProductItem(props: Props) {
-  const { product } = props;
+  const { price, product } = props;
   const isAvailable = product.available;
-  const imageWidth = 608;
-  const imageHeight = 608;
 
   const ProductLinkWrapper = ({ children }: { children: any }): JSX.Element => {
     return isAvailable ? (
@@ -32,13 +37,13 @@ export function ProductItem(props: Props) {
           <Image
             className="w-full h-full object-center object-cover lg:w-full lg:h-full rounded-lg"
             src={urlFor(product.defaultProductVariant.image)
-              .width(imageWidth)
-              .height(imageHeight)
+              .width(IMAGE_WIDTH)
+              .height(IMAGE_HEIGHT)
               .url()}
             alt={product.title}
             title={product.title}
-            width={imageWidth}
-            height={imageHeight}
+            width={IMAGE_WIDTH}
+            height={IMAGE_HEIGHT}
             layout="responsive"
           />
         </ProductLinkWrapper>
@@ -49,9 +54,14 @@ export function ProductItem(props: Props) {
         <p className="flex-grow">{product.blurb?.nb}</p>
 
         <div className="flex items-center justify-between flex-row md:flex-col lg:flex-row gap-4">
-          <span className="text-lg font-bold">
-            {formatPrice(product.defaultProductVariant.price)}
-          </span>
+          {price?.unit_amount && (
+            <span className="text-lg font-bold">
+              {formatCurrencyString({
+                value: price.unit_amount,
+                ...priceConfig,
+              })}
+            </span>
+          )}
 
           <ProductLinkWrapper>
             <Button

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { BiTrash } from "react-icons/bi";
+import { formatCurrencyString } from "use-shopping-cart";
 import type { Product as CartProduct } from "use-shopping-cart/core";
-import { formatPrice } from "~/lib/numbers";
 import { useShoppingCart } from "use-shopping-cart/react";
+import { priceConfig } from "~/lib/stripe/config";
 
 interface Props {
   cartProduct: CartProduct;
@@ -40,7 +41,10 @@ export function CartSummaryItem(props: Props) {
 
       <div style={{ gridArea: "price" }}>
         <p className="">
-          {formatPrice(cartProduct.price * cartProduct.quantity)}
+          {formatCurrencyString({
+            value: cartProduct.price * cartProduct.quantity,
+            ...priceConfig,
+          })}
         </p>
       </div>
 

@@ -9,6 +9,7 @@ import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { CartSummary } from "~/components/CartSummary";
+import { productsQuery } from "~/lib/sanity/queries";
 import sanityClient from "~/lib/sanity/sanityClient";
 import { Product } from "~/models/schema.sanity";
 
@@ -51,9 +52,7 @@ const CartPage: NextPage<
 export const getServerSideProps = async (): Promise<
   GetServerSidePropsResult<Props>
 > => {
-  const products = await sanityClient.fetch<Product[]>(
-    `*[_type == "product"] | order(order asc) { _id, title, slug, available, defaultProductVariant, variants, blurb }`
-  );
+  const products = await sanityClient.fetch<Product[]>(productsQuery);
 
   return {
     props: { products },

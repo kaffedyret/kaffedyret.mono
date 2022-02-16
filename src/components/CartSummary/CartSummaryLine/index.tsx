@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import { formatPrice } from "~/lib/numbers";
+import { formatCurrencyString } from "use-shopping-cart";
+import { priceConfig } from "~/lib/stripe/config";
 
 interface Props {
   isBold?: boolean;
@@ -29,7 +30,10 @@ export function CartSummaryLine(props: Props) {
 
       <div className="">
         <p className={classNames({ "font-bold": props.isBold })}>
-          {formatPrice(props.price)}
+          {formatCurrencyString({
+            value: props.price,
+            ...priceConfig,
+          })}
         </p>
       </div>
 

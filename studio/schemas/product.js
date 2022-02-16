@@ -22,6 +22,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "stripeProductId",
+      title: "Stripe Product ID",
+      type: "string",
+      codegen: { required: true },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "available",
       title: "Available",
       type: "boolean",
@@ -44,6 +51,17 @@ export default {
         {
           title: "Variant",
           type: "productVariant",
+        },
+      ],
+    },
+    {
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: { type: "category" },
         },
       ],
     },
@@ -72,17 +90,6 @@ export default {
       type: "localeString",
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
-    },
-    {
-      name: "categories",
-      title: "Categories",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: { type: "category" },
-        },
-      ],
     },
     {
       name: "body",
