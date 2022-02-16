@@ -17,9 +17,9 @@ export function CartSummary() {
       .post("/api/cart/checkout", cartDetails)
       .then((res) => {
         const { sessionId } = res.data;
-        
+
         // TODO: Make this work. We're so close now!
-        redirectToCheckout(sessionId);
+        redirectToCheckout({ sessionId });
       })
       .catch((err) => {
         console.log(err);
