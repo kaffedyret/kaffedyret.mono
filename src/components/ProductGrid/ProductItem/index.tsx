@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import Stripe from "stripe";
 import { formatCurrencyString } from "use-shopping-cart";
-import { Button } from "~/components/Button";
+import { PrimaryButton } from "~/components/Button";
 import urlFor from "~/lib/sanity/urlFor";
 import { priceConfig } from "~/lib/stripe/config";
 import { Product } from "~/models/schema.sanity";
@@ -64,13 +64,13 @@ export function ProductItem(props: Props) {
           )}
 
           <ProductLinkWrapper>
-            <Button
+            <PrimaryButton
               aria-disabled={!isAvailable}
               disabled={!isAvailable}
               iconRight={<BiRightArrowAlt className="scale-125" />}
             >
               {isAvailable ? "Se mer" : "Utsolgt"}
-            </Button>
+            </PrimaryButton>
           </ProductLinkWrapper>
         </div>
       </div>

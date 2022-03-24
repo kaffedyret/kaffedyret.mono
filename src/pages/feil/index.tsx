@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
-import { Button } from "~/components/Button";
+import { PrimaryButton } from "~/components/Button";
 
 const ErrorPage: NextPage = () => {
   return (
@@ -26,9 +26,9 @@ const ErrorPage: NextPage = () => {
           </p>
 
           <Link href="handlevogn" passHref>
-            <Button iconRight={<BiRightArrowAlt className="scale-125" />}>
+            <PrimaryButton iconRight={<BiRightArrowAlt className="scale-125" />}>
               Til handlevogn
-            </Button>
+            </PrimaryButton>
           </Link>
         </div>
       </section>

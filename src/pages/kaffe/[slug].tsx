@@ -13,7 +13,7 @@ import { formatCurrencyString } from "use-shopping-cart";
 import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
-import { Button } from "~/components/Button";
+import { PrimaryButton } from "~/components/Button";
 import { TextBlock } from "~/components/TextBlock";
 import useVariantSelect from "~/lib/hooks/useVariantSelect";
 import { getAllVariantsFromProduct } from "~/lib/product";
@@ -137,14 +137,14 @@ const CoffeePage: NextPage<
                 </select>
 
                 <div className="flex xs:col-span-2">
-                  <Button
+                  <PrimaryButton
                     iconRight={<BiPlus className="scale-125" />}
                     type="submit"
                     disabled={!currentPrice?.unit_amount}
                     aria-disabled={!currentPrice?.unit_amount}
                   >
                     Legg i handlevogn
-                  </Button>
+                  </PrimaryButton>
                 </div>
               </div>
             </form>
