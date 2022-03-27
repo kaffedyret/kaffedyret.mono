@@ -5,44 +5,52 @@ import {
   NextPage,
 } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 import Stripe from "stripe";
+import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
-import { CartSummary } from "~/components/CartSummary";
+import { OrderSummary } from "~/components/OrderSummary";
+import { productsQuery } from "~/lib/sanity/queries";
+import sanityClient from "~/lib/sanity/sanityClient";
 import stripe from "~/lib/stripe";
+import { Product } from "~/models/schema.sanity";
 
 interface Props {
-  session?: Stripe.Checkout.Session;
   customer?: Stripe.Customer | Stripe.DeletedCustomer;
+  lineItems?: Stripe.LineItem[];
+  session?: Stripe.Checkout.Session;
+  products?: Product[];
 }
 
 const OrderPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = (props) => {
-  const { customer, session } = props;
+  const { customer, lineItems, products, session } = props;
+  const { cartCount, clearCart } = useShoppingCart();
+
+  // TODO: This doesn't return anything as the IDs from lineItems doesn't seem to match the ID of the products.
+  const lineItemProducts = products?.filter((p) =>
+    lineItems?.map((li) => li.price?.product).includes(p.stripeProductId)
+  );
+
+  useEffect(() => {
+    if (cartCount > 0) clearCart();
+  }, []);
 
   const renderError = () => (
     <p>Her ser det ut som det kan ha skjedd en feil. Ta kontakt med oss.</p>
   );
 
-  const renderDeletedCustomer = () => {
-    return (
-      <div>
-        <h3>Tusen takk for bestillingen!</h3>
-        <p>Vi gjør klar bestillingen din og gir deg beskjed når den er klar.</p>
-      </div>
-    );
-  };
-
   const renderCustomer = () => {
-    const verifiedCustomer = customer as Stripe.Customer;
-
     return (
       <div>
-        <h3>Tusen takk for bestillingen, {verifiedCustomer.name}!</h3>
+        {customer?.deleted ? (
+          <h3>Tusen takk for bestillingen!</h3>
+        ) : (
+          <h3>Tusen takk for bestillingen, {customer?.name}!</h3>
+        )}
         <p>Vi gjør klar bestillingen din og gir deg beskjed når den er klar.</p>
-
-        <CartSummary />
       </div>
     );
   };
@@ -61,11 +69,9 @@ const OrderPage: NextPage<
         <div className="container-narrow prose lg:prose-lg xl:prose-xl">
           <h1>Ordrebekreftelse</h1>
 
-          {!customer || !session
-            ? renderError()
-            : customer?.deleted
-            ? renderDeletedCustomer()
-            : renderCustomer()}
+          {!customer || !session ? renderError() : renderCustomer()}
+
+          <OrderSummary lineItems={lineItems} session={session} />
         </div>
       </section>
     </div>
@@ -92,12 +98,20 @@ export const getServerSideProps = async ({
     };
   }
 
-  const customer = await stripe.customers.retrieve(session.customer);
+  const [customer, lineItems, products] = await Promise.all([
+    stripe.customers.retrieve(session.customer),
+    stripe.checkout.sessions.listLineItems(session_id as string, {
+      limit: 100,
+    }),
+    sanityClient.fetch<Product[]>(productsQuery),
+  ]);
 
   return {
     props: {
       customer,
+      lineItems: lineItems?.data,
       session,
+      products,
     },
   };
 };
