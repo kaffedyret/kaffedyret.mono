@@ -36,8 +36,8 @@ interface FormProps {
   sku: { value: string };
 }
 
-const IMAGE_WIDTH = 608;
-const IMAGE_HEIGHT = 608;
+const IMAGE_WIDTH = 592;
+const IMAGE_HEIGHT = 831;
 
 const CoffeePage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -140,7 +140,7 @@ const CoffeePage: NextPage<
                 <div className="flex xs:col-span-2">
                   <PrimaryButton
                     iconRight={
-                      isAvailable ? <BiPlus className="scale-125" /> : null
+                      isAvailable ? <BiPlus className="scale-125" /> : undefined
                     }
                     type="submit"
                     disabled={!isAvailable || !currentPrice?.unit_amount}
