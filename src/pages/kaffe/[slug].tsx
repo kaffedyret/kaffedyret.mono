@@ -36,8 +36,8 @@ interface FormProps {
   sku: { value: string };
 }
 
-const IMAGE_WIDTH = 608;
-const IMAGE_HEIGHT = 608;
+const IMAGE_WIDTH = 592;
+const IMAGE_HEIGHT = 831;
 
 const CoffeePage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>

@@ -13,8 +13,8 @@ interface Props {
   product: Product;
 }
 
-const IMAGE_WIDTH = 608;
-const IMAGE_HEIGHT = 608;
+const IMAGE_WIDTH = 592;
+const IMAGE_HEIGHT = 831;
 
 export function ProductItem(props: Props) {
   const { price, product } = props;
