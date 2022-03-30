@@ -103,11 +103,11 @@ export interface Employee extends SanityDocument {
   email: string;
 
   /**
-   * Description — `text`
+   * Description — `localeBlockContent`
    *
    *
    */
-  description: string;
+  description: LocaleBlockContent;
 
   /**
    * Image — `image`
@@ -120,6 +120,13 @@ export interface Employee extends SanityDocument {
     crop?: SanityImageCrop;
     hotspot?: SanityImageHotspot;
   };
+
+  /**
+   * Order — `number`
+   *
+   *
+   */
+  order?: number;
 }
 
 /**

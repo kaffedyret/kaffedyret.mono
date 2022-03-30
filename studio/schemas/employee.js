@@ -27,7 +27,7 @@ export default {
     {
       name: "description",
       title: "Description",
-      type: "text",
+      type: "localeBlockContent",
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
     },
@@ -40,6 +40,12 @@ export default {
       },
       codegen: { required: true },
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "order",
+      title: "Order",
+      type: "number",
+      hidden: true,
     },
   ],
   preview: {
