@@ -8,16 +8,16 @@ export function Footer() {
     <footer>
       <div className="bg-neutral-900 text-white py-12">
         <div className="container-narrow py-2 prose prose-invert prose-sm">
-          <section className="grid grid-cols-4 gap-8 items-center">
-            <div className="p-12">
+          <section className="grid grid-cols-1 md:grid-cols-4 gap-8 place-items-center text-center md:text-left">
+            <div className="md:p-12 h-24 md:h-80">
               <Maskot />
             </div>
 
-            <div className="col-span-3 grid grid-cols-3 gap-8">
+            <div className="col-span-1 md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
                 <h4>Sosiale medier</h4>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center md:justify-start gap-2">
                   <a
                     href="https://www.instagram.com/kaffedyret_brenneri"
                     rel="noreferrer noopener"
