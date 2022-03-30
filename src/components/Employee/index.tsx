@@ -2,7 +2,7 @@ import Image from "next/image";
 import urlFor from "~/lib/sanity/urlFor";
 import { Employee } from "~/models/schema.sanity";
 import { TextBlock } from "../TextBlock";
-
+import { BiEnvelope } from "react-icons/bi";
 interface Props {
   employee: Employee;
 }
@@ -34,6 +34,13 @@ export function Employee({ employee }: Props) {
         {employee.description.nb && (
           <TextBlock>{employee.description.nb}</TextBlock>
         )}
+
+        <a
+          className="flex items-center gap-1"
+          href={`mailto:${employee.email}`}
+        >
+          <BiEnvelope /> {employee.email}
+        </a>
       </div>
     </article>
   );
