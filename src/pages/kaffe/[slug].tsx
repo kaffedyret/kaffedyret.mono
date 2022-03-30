@@ -7,6 +7,7 @@ import {
 import Head from "next/head";
 import Image from "next/image";
 import { SyntheticEvent } from "react";
+import { useAlert } from "react-alert";
 import { BiPlus } from "react-icons/bi";
 import Stripe from "stripe";
 import { formatCurrencyString } from "use-shopping-cart";
@@ -23,7 +24,6 @@ import urlFor from "~/lib/sanity/urlFor";
 import stripe from "~/lib/stripe";
 import { priceConfig } from "~/lib/stripe/config";
 import { Product, ProductVariant } from "~/models/schema.sanity";
-
 interface Props {
   allVariants: ProductVariant[];
   prices: Stripe.Price[];
@@ -51,6 +51,7 @@ const CoffeePage: NextPage<
 
   const isAvailable = product.available;
   const { addItem } = useShoppingCart();
+  const alert = useAlert();
 
   const handleVariantChange = (e: any) => {
     setSku(e.target.value);
@@ -78,6 +79,8 @@ const CoffeePage: NextPage<
       },
       { count: amount }
     );
+
+    alert.success(`${amount} stk. ${product.title} lagt i handlevognen`);
   };
 
   return (
