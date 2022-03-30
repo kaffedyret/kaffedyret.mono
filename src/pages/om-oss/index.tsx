@@ -35,8 +35,9 @@ const AboutPage: NextPage<
         <div className="container-narrow prose lg:prose-lg xl:prose-xl">
           <h1>Om oss</h1>
           <p>
-            Her kommer litt tekst om vi som driver <Kaffedyret />.
+            <Kaffedyret /> ble startet av Christian som en personlig berettigelse for å kjøpe en flottere kaffebrenner enn den han hadde fra før. Litt etter litt vokste kundebasen og det som var et hobbyprosjekt ble til en sidejobb.
           </p>
+          <p>Vi ønsker at spesialitetskaffe ikke skal være så skremmende dyrt og streber for å være et vennlig fjes i kaffeverdens møte med alle slags mennesker; både nybegynnere og entusiaster.</p>
         </div>
 
         <div className="container-narrow grid grid-cols-1 lg:grid-cols-2 gap-16">
