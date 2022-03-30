@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import Stripe from "stripe";
 import { formatCurrencyString } from "use-shopping-cart";
-import { PrimaryButton } from "~/components/Button";
+import { PrimaryButton, SecondaryButton } from "~/components/Button";
 import urlFor from "~/lib/sanity/urlFor";
 import { priceConfig } from "~/lib/stripe/config";
 import { Product } from "~/models/schema.sanity";
@@ -21,12 +21,10 @@ export function ProductItem(props: Props) {
   const isAvailable = product.available;
 
   const ProductLinkWrapper = ({ children }: { children: any }): JSX.Element => {
-    return isAvailable ? (
+    return (
       <Link href={`/kaffe/${product.slug?.current}`}>
         <a className="no-underline">{children}</a>
       </Link>
-    ) : (
-      children
     );
   };
 
@@ -64,13 +62,19 @@ export function ProductItem(props: Props) {
           )}
 
           <ProductLinkWrapper>
-            <PrimaryButton
-              aria-disabled={!isAvailable}
-              disabled={!isAvailable}
-              iconRight={<BiRightArrowAlt className="scale-125" />}
-            >
-              {isAvailable ? "Se mer" : "Utsolgt"}
-            </PrimaryButton>
+            {isAvailable ? (
+              <PrimaryButton
+                iconRight={<BiRightArrowAlt className="scale-125" />}
+              >
+                Se mer
+              </PrimaryButton>
+            ) : (
+              <SecondaryButton
+                iconRight={<BiRightArrowAlt className="scale-125" />}
+              >
+                Utsolgt
+              </SecondaryButton>
+            )}
           </ProductLinkWrapper>
         </div>
       </div>

@@ -15,6 +15,7 @@ export function PrimaryButton(props: ButtonProps): JSX.Element {
         },
         className
       )}
+      disabled={disabled}
       {...rest}
     >
       {children}
