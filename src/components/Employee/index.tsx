@@ -1,8 +1,8 @@
 import Image from "next/image";
+import { BiEnvelope } from "react-icons/bi";
 import urlFor from "~/lib/sanity/urlFor";
 import { Employee } from "~/models/schema.sanity";
 import { TextBlock } from "../TextBlock";
-import { BiEnvelope } from "react-icons/bi";
 interface Props {
   employee: Employee;
 }
