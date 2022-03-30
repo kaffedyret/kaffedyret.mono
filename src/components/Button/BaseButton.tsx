@@ -28,7 +28,7 @@ export function BaseButton(props: Props): JSX.Element {
           "px-8 py-4 text-xl": isLarge,
           "drop-shadow-sm hover:drop-shadow-lg transition-all ease-in-out duration-200":
             !disabled,
-          "bg-neutral-300": disabled,
+          "bg-neutral-300 cursor-default": disabled,
         },
         className
       )}

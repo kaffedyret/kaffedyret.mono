@@ -49,6 +49,7 @@ const CoffeePage: NextPage<
     prices
   );
 
+  const isAvailable = product.available;
   const { addItem } = useShoppingCart();
 
   const handleVariantChange = (e: any) => {
@@ -60,7 +61,7 @@ const CoffeePage: NextPage<
     const target = e.target as typeof e.target & FormProps;
     const amount = Number(target.amount.value);
 
-    if (!currentPrice) {
+    if (!isAvailable || !currentPrice) {
       // TODO: Show error
       return;
     }
@@ -138,12 +139,14 @@ const CoffeePage: NextPage<
 
                 <div className="flex xs:col-span-2">
                   <PrimaryButton
-                    iconRight={<BiPlus className="scale-125" />}
+                    iconRight={
+                      isAvailable ? <BiPlus className="scale-125" /> : null
+                    }
                     type="submit"
-                    disabled={!currentPrice?.unit_amount}
-                    aria-disabled={!currentPrice?.unit_amount}
+                    disabled={!isAvailable || !currentPrice?.unit_amount}
+                    aria-disabled={!isAvailable || !currentPrice?.unit_amount}
                   >
-                    Legg i handlevogn
+                    {isAvailable ? "Legg i handlevogn" : "Utsolgt"}
                   </PrimaryButton>
                 </div>
               </div>

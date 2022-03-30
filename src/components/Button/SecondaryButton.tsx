@@ -15,6 +15,7 @@ export function SecondaryButton(props: ButtonProps): JSX.Element {
         },
         className
       )}
+      disabled={disabled}
       {...rest}
     >
       {children}
