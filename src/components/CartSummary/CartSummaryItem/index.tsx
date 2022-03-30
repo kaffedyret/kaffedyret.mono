@@ -18,7 +18,7 @@ export function CartSummaryItem(props: Props) {
   };
 
   return cartProduct ? (
-    <div className="grid grid-cols-cart-summary-item sm:grid-cols-sm-cart-summary-item grid-template-areas-cart-summary-item items-center gap-x-4 first:border-t border-b border-neutral-200 not-prose">
+    <div className="grid grid-template-areas-cart-summary-item items-center gap-x-4 first:border-t border-b border-neutral-200 not-prose">
       <div
         className="flex justify-center items-center py-2"
         style={{ gridArea: "image" }}
@@ -34,12 +34,14 @@ export function CartSummaryItem(props: Props) {
       </div>
 
       <div style={{ gridArea: "title" }}>
-        <p>
-          {cartProduct.name} ({cartProduct.quantity} stk.)
-        </p>
+        <p>{cartProduct.name}</p>
       </div>
 
-      <div style={{ gridArea: "price" }}>
+      <div style={{ gridArea: "amount" }}>
+        <p>{cartProduct.quantity} stk.</p>
+      </div>
+
+      <div style={{ gridArea: "price" }} className="text-right">
         <p className="">
           {formatCurrencyString({
             value: cartProduct.price * cartProduct.quantity,

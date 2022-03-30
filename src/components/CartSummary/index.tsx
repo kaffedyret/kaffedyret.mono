@@ -1,16 +1,21 @@
 import axios from "axios";
-import { BiRightArrowAlt } from "react-icons/bi";
+import { BiRightArrowAlt, BiTrash } from "react-icons/bi";
 import type { Product as CartProduct } from "use-shopping-cart/core";
 import { useShoppingCart } from "use-shopping-cart/react";
-import { Button } from "../Button";
+import { PrimaryButton, SecondaryButton } from "../Button";
 import { CartSummaryItem } from "./CartSummaryItem";
 import { CartSummaryTotal } from "./CartSummaryTotal";
 
 export function CartSummary() {
-  const { cartDetails, redirectToCheckout } = useShoppingCart();
+  const { cartDetails, redirectToCheckout, clearCart } = useShoppingCart();
   const cartProducts = Object.values(
     cartDetails as Record<string, CartProduct>
   );
+
+  const handleClearCartClick = () => {
+    // TODO: Ask for confirmation
+    clearCart();
+  };
 
   const handleGoToCheckoutClick = async () => {
     axios
@@ -34,13 +39,20 @@ export function CartSummary() {
 
       <CartSummaryTotal />
 
-      <div className="flex pt-8 justify-end">
-        <Button
+      <div className="flex flex-wrap pt-8 justify-between gap-4">
+        <SecondaryButton
+          iconRight={<BiTrash className="scale-125" />}
+          onClick={handleClearCartClick}
+        >
+          Tøm handlevogn
+        </SecondaryButton>
+
+        <PrimaryButton
           iconRight={<BiRightArrowAlt className="scale-125" />}
           onClick={handleGoToCheckoutClick}
         >
           Til betaling
-        </Button>
+        </PrimaryButton>
       </div>
     </div>
   ) : (

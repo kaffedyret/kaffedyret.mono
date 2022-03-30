@@ -11,8 +11,6 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         header: "auto 1fr auto",
-        "cart-summary-item": "3.5rem 1fr 3rem",
-        "sm-cart-summary-item": "3.5rem 1fr auto 3rem",
       },
       gridTemplateRows: {
         app: "auto 1fr auto",

@@ -37,6 +37,99 @@ export type {
 };
 
 /**
+ * Category
+ *
+ *
+ */
+export interface Category extends SanityDocument {
+  _type: "category";
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
+
+  /**
+   * Description — `text`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Parent categories — `array`
+   *
+   *
+   */
+  parents?: Array<SanityKeyedReference<Category>>;
+}
+
+/**
+ * Employee
+ *
+ *
+ */
+export interface Employee extends SanityDocument {
+  _type: "employee";
+
+  /**
+   * Name — `string`
+   *
+   *
+   */
+  name: string;
+
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title: string;
+
+  /**
+   * Email — `string`
+   *
+   *
+   */
+  email: string;
+
+  /**
+   * Description — `localeBlockContent`
+   *
+   *
+   */
+  description: LocaleBlockContent;
+
+  /**
+   * Image — `image`
+   *
+   *
+   */
+  image: {
+    _type: "image";
+    asset: SanityReference<SanityImageAsset>;
+    crop?: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+  };
+
+  /**
+   * Order — `number`
+   *
+   *
+   */
+  order?: number;
+}
+
+/**
  * Product
  *
  *
@@ -171,43 +264,6 @@ export interface Vendor extends SanityDocument {
   description?: BlockContent;
 }
 
-/**
- * Category
- *
- *
- */
-export interface Category extends SanityDocument {
-  _type: "category";
-
-  /**
-   * Title — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Slug — `slug`
-   *
-   *
-   */
-  slug?: { _type: "slug"; current: string };
-
-  /**
-   * Description — `text`
-   *
-   *
-   */
-  description?: string;
-
-  /**
-   * Parent categories — `array`
-   *
-   *
-   */
-  parents?: Array<SanityKeyedReference<Category>>;
-}
-
 export type BlockContent = Array<
   | SanityKeyed<SanityBlock>
   | SanityKeyed<{
@@ -217,23 +273,6 @@ export type BlockContent = Array<
       hotspot?: SanityImageHotspot;
     }>
 >;
-
-export type LocaleText = {
-  _type: "localeText";
-  /**
-   * Norwegian — `text`
-   *
-   *
-   */
-  nb?: string;
-
-  /**
-   * English — `text`
-   *
-   *
-   */
-  en?: string;
-};
 
 export type LocaleBlockContent = {
   _type: "localeBlockContent";
@@ -263,6 +302,23 @@ export type LocaleString = {
 
   /**
    * English — `string`
+   *
+   *
+   */
+  en?: string;
+};
+
+export type LocaleText = {
+  _type: "localeText";
+  /**
+   * Norwegian — `text`
+   *
+   *
+   */
+  nb?: string;
+
+  /**
+   * English — `text`
    *
    *
    */
@@ -312,4 +368,4 @@ export type ProductVariant = {
   };
 };
 
-export type Documents = Product | Vendor | Category;
+export type Documents = Category | Employee | Product | Vendor;

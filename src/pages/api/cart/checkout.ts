@@ -42,14 +42,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         allowed_countries: ["NO"],
       },
       mode: "payment",
-      success_url: process.env.STRIPE_SUCCESS_URL || "",
+      success_url: process.env.STRIPE_SUCCESS_URL
+        ? `${process.env.STRIPE_SUCCESS_URL}?session_id={CHECKOUT_SESSION_ID}`
+        : "",
       cancel_url: process.env.STRIPE_CANCEL_URL || "",
+      locale: "nb",
+      shipping_options: [], // TODO: Add shipping options
       line_items,
     });
   } catch (error) {
     return res.status(500).json({
       message: "While communicating with Stripe, we encountered an error.",
-      error
+      error,
     });
   }
 

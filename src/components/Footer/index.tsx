@@ -1,12 +1,69 @@
+import Link from "next/link";
+import { BiEnvelope } from "react-icons/bi";
+import { FaFacebook, FaFacebookSquare, FaInstagram } from "react-icons/fa";
+import { Maskot } from "../Maskot";
+
 export function Footer() {
   return (
     <footer>
       <div className="bg-neutral-900 text-white py-12">
-        <div className="container-narrow py-2">
-          <p>Footer</p>
+        <div className="container-narrow py-2 prose prose-invert prose-sm">
+          <section className="grid grid-cols-4 gap-8 items-center">
+            <div className="p-12">
+              <Maskot />
+            </div>
+
+            <div className="col-span-3 grid grid-cols-3 gap-8">
+              <div>
+                <h4>Sosiale medier</h4>
+
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://www.instagram.com/kaffedyret_brenneri"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                  >
+                    <FaInstagram fontSize={20} />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/Kaffedyret"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                  >
+                    <FaFacebookSquare fontSize={20} />
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h4>Kaffedyret</h4>
+
+                <div className="flex flex-col">
+                  <Link href="/om-oss">
+                    <a>Om oss</a>
+                  </Link>
+                </div>
+              </div>
+
+              <div>
+                <h4>Kontakt oss</h4>
+
+                <div className="not-prose">
+                  <p>Gunnlafjellet 11A</p>
+                  <p>5302 Strusshamn</p>
+                  <a
+                    className="prose prose-invert prose-sm"
+                    href="mailto:hei@kaffedyret.no"
+                  >
+                    hei@kaffedyret.no
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
-      
+
       <div className="bg-black text-white py-1">
         <div className="container py-2">
           <p className="text-xs text-center">Kaffedyret 2022&copy;</p>

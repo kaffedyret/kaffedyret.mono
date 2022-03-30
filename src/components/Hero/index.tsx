@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "../Button";
+import { PrimaryButton } from "../Button";
 import { Kaffedyret } from "../Kaffedyret";
 import { Maskot } from "../Maskot";
 import { BiRightArrowAlt } from "react-icons/bi";
@@ -21,12 +21,12 @@ export function Hero() {
           </div>
 
           <Link href="/kaffe" passHref>
-            <Button
+            <PrimaryButton
               isLarge
               iconRight={<BiRightArrowAlt className="scale-125" />}
             >
               Se vårt utvalg
-            </Button>
+            </PrimaryButton>
           </Link>
         </div>
       </div>

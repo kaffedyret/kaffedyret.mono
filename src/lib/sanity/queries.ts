@@ -20,3 +20,12 @@ export const productQuery = `*[_type == "product" && slug.current == $slug] | or
   blurb,
   body
 }`;
+
+export const employeesQuery = `*[_type == "employee"] | order(order asc) {
+  _id,
+  name,
+  title,
+  email,
+  description,
+  image,
+}`;
