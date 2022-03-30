@@ -140,7 +140,7 @@ const CoffeePage: NextPage<
                 <div className="flex xs:col-span-2">
                   <PrimaryButton
                     iconRight={
-                      isAvailable ? <BiPlus className="scale-125" /> : null
+                      isAvailable ? <BiPlus className="scale-125" /> : undefined
                     }
                     type="submit"
                     disabled={!isAvailable || !currentPrice?.unit_amount}
