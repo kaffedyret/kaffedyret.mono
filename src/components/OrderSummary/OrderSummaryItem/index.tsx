@@ -12,7 +12,7 @@ interface Props {
 
 export function OrderSummaryItem({ lineItem }: Props) {
   return lineItem ? (
-    <div className="grid grid-cols-order-summary-item sm:grid-cols-sm-order-summary-item grid-template-areas-order-summary-item items-center gap-x-4 first:border-t border-b border-neutral-200 not-prose">
+    <div className="grid grid-template-areas-order-summary-item items-center gap-x-4 first:border-t border-b border-neutral-200 not-prose">
       <div style={{ gridArea: "title" }}>
         <p>{lineItem.description}</p>
       </div>

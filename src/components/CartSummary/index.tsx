@@ -39,7 +39,7 @@ export function CartSummary() {
 
       <CartSummaryTotal />
 
-      <div className="flex pt-8 justify-between">
+      <div className="flex flex-wrap pt-8 justify-between gap-4">
         <SecondaryButton
           iconRight={<BiTrash className="scale-125" />}
           onClick={handleClearCartClick}
