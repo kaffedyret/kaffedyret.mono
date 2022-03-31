@@ -23,7 +23,6 @@ export function CartSummary() {
       .then((res) => {
         const { sessionId } = res.data;
 
-        // TODO: Make this work. We're so close now!
         redirectToCheckout({ sessionId });
       })
       .catch((err) => {
