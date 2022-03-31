@@ -63,7 +63,12 @@ const CoffeePage: NextPage<
     const amount = Number(target.amount.value);
 
     if (!isAvailable || !currentPrice) {
-      // TODO: Show error
+      alert.error("Her skjedde det en feil.");
+      return;
+    }
+
+    if (amount <= 0) {
+      alert.error(`Det er ikke vits å legge ${amount} stk. i handlekurven...`);
       return;
     }
 
@@ -126,7 +131,7 @@ const CoffeePage: NextPage<
                     : "Ingen priser funnet"}
                 </p>
 
-                <input name="amount" type="number" defaultValue={1} />
+                <input name="amount" type="number" defaultValue={1} min={1} />
 
                 <select name="sku" onChange={handleVariantChange}>
                   <option value={product.defaultProductVariant.sku}>

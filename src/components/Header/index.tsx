@@ -18,7 +18,7 @@ export function Header() {
           className="container-narrow grid grid-cols-3 md:grid-cols-header gap-4 py-2 px-2"
           role="navigation"
         >
-          <div className="md:hidden">
+          <div className="md:hidden" data-test-id="navigation-mobile">
             <MobileNav />
           </div>
 
@@ -39,7 +39,10 @@ export function Header() {
             </Link>
           </div>
 
-          <div className="hidden md:flex justify-center items-center">
+          <div
+            className="hidden md:flex justify-center items-center"
+            data-test-id="navigation-desktop"
+          >
             <Nav />
           </div>
 
