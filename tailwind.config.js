@@ -11,6 +11,8 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         header: "auto 1fr auto",
+        "radio-button": "auto 1fr",
+        "shipping-rate-label": "1fr auto",
       },
       gridTemplateRows: {
         app: "auto 1fr auto",
