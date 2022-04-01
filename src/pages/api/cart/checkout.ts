@@ -20,8 +20,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: "Missing body." });
   }
 
-  const cartProducts = req.body;
+  const { cartProducts } = req.body;
   const inventory = await getAllInventory();
+  const { data } = await stripe.shippingRates.list();
+  const shippingRates = data
+    .filter((s) => s.active)
+    .sort((a, b) =>
+      a.fixed_amount && b.fixed_amount
+        ? a.fixed_amount.amount - b.fixed_amount.amount
+        : 0
+    );
 
   let line_items;
   try {
@@ -47,7 +55,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         : "",
       cancel_url: process.env.STRIPE_CANCEL_URL || "",
       locale: "nb",
-      shipping_options: [], // TODO: Add shipping options
+      discounts: [], // TODO: Implement discounts
+      shipping_options: shippingRates.map((s) => ({ shipping_rate: s.id })),
       line_items,
     });
   } catch (error) {

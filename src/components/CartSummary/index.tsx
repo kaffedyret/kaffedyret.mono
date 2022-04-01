@@ -20,7 +20,7 @@ export function CartSummary() {
 
   const handleGoToCheckoutClick = async () => {
     axios
-      .post("/api/cart/checkout", cartDetails)
+      .post("/api/cart/checkout", { cartProducts: cartDetails })
       .then((res) => {
         const { sessionId } = res.data;
 
@@ -58,7 +58,7 @@ export function CartSummary() {
   ) : (
     <div>
       <p>Her var det visst tomt.</p>
-      
+
       <Link href="/kaffe" passHref>
         <PrimaryButton iconRight={<BiRightArrowAlt className="scale-125" />}>
           Se vårt utvalg
