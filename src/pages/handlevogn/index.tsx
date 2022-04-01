@@ -67,8 +67,15 @@ export const getServerSideProps = async (): Promise<
 > => {
   const { data } = await stripe.shippingRates.list();
 
-  // TODO: Also sort shipping rates by price
-  const shippingRates = data.filter((s) => s.active);
+  // Filtering out the inactive shipping rates.
+  // Sorting by ascended fixed amount
+  const shippingRates = data
+    .filter((s) => s.active)
+    .sort((a, b) =>
+      a.fixed_amount && b.fixed_amount
+        ? a.fixed_amount.amount - b.fixed_amount.amount
+        : 0
+    );
 
   return {
     props: { shippingRates: shippingRates },
