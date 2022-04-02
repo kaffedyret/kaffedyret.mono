@@ -8,7 +8,7 @@ const CartPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Handlekurv</title>
+        <title>Handlevogn</title>
       </Head>
 
       <Breadcrumbs>

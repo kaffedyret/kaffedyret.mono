@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import { BiRightArrowAlt, BiTrash } from "react-icons/bi";
 import type { Product as CartProduct } from "use-shopping-cart/core";
 import { useShoppingCart } from "use-shopping-cart/react";
@@ -19,7 +20,7 @@ export function CartSummary() {
 
   const handleGoToCheckoutClick = async () => {
     axios
-      .post("/api/cart/checkout", cartDetails)
+      .post("/api/cart/checkout", { cartProducts: cartDetails })
       .then((res) => {
         const { sessionId } = res.data;
 
@@ -55,6 +56,14 @@ export function CartSummary() {
       </div>
     </div>
   ) : (
-    <p>Handlevognen er tom.</p>
+    <div>
+      <p>Her var det visst tomt.</p>
+
+      <Link href="/kaffe" passHref>
+        <PrimaryButton iconRight={<BiRightArrowAlt className="scale-125" />}>
+          Se vårt utvalg
+        </PrimaryButton>
+      </Link>
+    </div>
   );
 }
