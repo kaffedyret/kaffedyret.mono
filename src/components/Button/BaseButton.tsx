@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: ReactNode;
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;
   isLarge?: boolean;
