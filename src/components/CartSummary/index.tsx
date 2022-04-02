@@ -20,7 +20,7 @@ export function CartSummary() {
 
   const handleGoToCheckoutClick = async () => {
     axios
-      .post("/api/cart/checkout", { cartProducts: cartDetails })
+      .post("/api/cart/checkout", { cartDetails })
       .then((res) => {
         const { sessionId } = res.data;
 
