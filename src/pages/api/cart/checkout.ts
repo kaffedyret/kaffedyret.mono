@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { validateCartItems } from "use-shopping-cart/utilities/serverless";
 import stripe from "~/lib/stripe";
 import { getAllInventory } from "~/lib/stripe/product";
+import { filterShippingRates } from "~/lib/stripe/shippingRate";
+import type { CartDetails, CartEntry } from "use-shopping-cart/core";
 
 /*
  * This function creates a Stripe Checkout session and returns the session ID
@@ -20,20 +22,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: "Missing body." });
   }
 
-  const { cartProducts } = req.body;
+  const { cartDetails } = req.body;
+  const cartCount = Object.values(cartDetails as CartDetails).reduce(
+    (prev, cartDetail) => prev + cartDetail.quantity,
+    0
+  );
+
   const inventory = await getAllInventory();
   const { data } = await stripe.shippingRates.list();
-  const shippingRates = data
-    .filter((s) => s.active)
-    .sort((a, b) =>
-      a.fixed_amount && b.fixed_amount
-        ? a.fixed_amount.amount - b.fixed_amount.amount
-        : 0
-    );
+  const shippingRates = filterShippingRates(data, cartCount).sort((a, b) =>
+    a.fixed_amount && b.fixed_amount
+      ? a.fixed_amount.amount - b.fixed_amount.amount
+      : 0
+  );
 
   let line_items;
   try {
-    line_items = validateCartItems(inventory, cartProducts);
+    line_items = validateCartItems(inventory, cartDetails);
   } catch (error) {
     return res.status(422).json({
       message: "Some of the items in your cart are invalid.",
