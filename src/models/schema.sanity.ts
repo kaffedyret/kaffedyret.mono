@@ -130,6 +130,218 @@ export interface Employee extends SanityDocument {
 }
 
 /**
+ * Order
+ *
+ *
+ */
+export interface Order extends SanityDocument {
+  _type: "order";
+
+  /**
+   * Session ID — `string`
+   *
+   *
+   */
+  sessionId: string;
+
+  /**
+   * Customer ID — `string`
+   *
+   *
+   */
+  customerId?: string;
+
+  /**
+   * Customer name — `string`
+   *
+   *
+   */
+  customerName?: string;
+
+  /**
+   * Customer email — `string`
+   *
+   *
+   */
+  customerEmail?: string;
+
+  /**
+   * Shipping — `object`
+   *
+   *
+   */
+  shipping: {
+    _type: "shipping";
+    /**
+     * Name — `string`
+     *
+     *
+     */
+    name?: string;
+
+    /**
+     * Shipping rate — `object`
+     *
+     *
+     */
+    shippingRate: {
+      _type: "shippingRate";
+      /**
+       * Shipping rate ID — `string`
+       *
+       *
+       */
+      id?: string;
+
+      /**
+       * Display name — `string`
+       *
+       *
+       */
+      displayName?: string;
+    };
+
+    /**
+     * Address — `object`
+     *
+     *
+     */
+    address?: {
+      _type: "address";
+      /**
+       * Address line 1 — `string`
+       *
+       *
+       */
+      line1?: string;
+
+      /**
+       * Address line 2 — `string`
+       *
+       *
+       */
+      line2?: string;
+
+      /**
+       * Postal code — `string`
+       *
+       *
+       */
+      postalCode?: string;
+
+      /**
+       * City — `string`
+       *
+       *
+       */
+      city?: string;
+
+      /**
+       * State — `string`
+       *
+       *
+       */
+      state?: string;
+
+      /**
+       * Country — `string`
+       *
+       *
+       */
+      country?: string;
+    };
+  };
+
+  /**
+   * Status — `reference`
+   *
+   *
+   */
+  status: SanityReference<OrderStatus>;
+
+  /**
+   * Amount subtotal — `number`
+   *
+   *
+   */
+  amountSubtotal: number;
+
+  /**
+   * Amount total — `number`
+   *
+   *
+   */
+  amountTotal: number;
+
+  /**
+   * Order datetime — `datetime`
+   *
+   *
+   */
+  orderDatetime: string;
+
+  /**
+   * Line items — `array`
+   *
+   *
+   */
+  lineItems?: Array<
+    SanityKeyed<{
+      /**
+       * Description — `string`
+       *
+       *
+       */
+      description?: string;
+
+      /**
+       * Stripe ID — `string`
+       *
+       *
+       */
+      id?: string;
+
+      /**
+       * Amount total — `number`
+       *
+       *
+       */
+      amountTotal?: number;
+
+      /**
+       * Quantity — `number`
+       *
+       *
+       */
+      quantity?: number;
+    }>
+  >;
+}
+
+/**
+ * Order status
+ *
+ *
+ */
+export interface OrderStatus extends SanityDocument {
+  _type: "orderStatus";
+
+  /**
+   * Name — `string`
+   *
+   *
+   */
+  name: string;
+
+  /**
+   * Order — `number`
+   *
+   *
+   */
+  order?: number;
+}
+
+/**
  * Product
  *
  *
@@ -368,4 +580,10 @@ export type ProductVariant = {
   };
 };
 
-export type Documents = Category | Employee | Product | Vendor;
+export type Documents =
+  | Category
+  | Employee
+  | Order
+  | OrderStatus
+  | Product
+  | Vendor;

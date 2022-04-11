@@ -29,3 +29,8 @@ export const employeesQuery = `*[_type == "employee"] | order(order asc) {
   description,
   image,
 }`;
+
+export const orderStatusesQuery = `*[_type == "orderStatus"] | order(order asc) {
+  _id,
+  name,
+}`;
