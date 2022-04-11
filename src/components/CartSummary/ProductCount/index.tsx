@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import type { Product as CartProduct } from "use-shopping-cart/core";
 import { useShoppingCart } from "use-shopping-cart/react";
-import { TextButton } from "~/components/Button";
 
 interface Props {
   cartProduct: CartProduct;
@@ -14,7 +13,10 @@ interface ProductCountButtonProps {
 }
 
 const ProductCountButton = ({ children, onClick }: ProductCountButtonProps) => (
-  <button className="flex h-full items-center px-2 first:border-r last:border-l bg-white hover:bg-neutral-50" onClick={onClick}>
+  <button
+    className="flex h-full items-center px-2 first:border-r last:border-l bg-white hover:bg-neutral-50"
+    onClick={onClick}
+  >
     {children}
   </button>
 );
