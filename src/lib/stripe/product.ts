@@ -1,11 +1,10 @@
-import { Product as SanityProduct } from "~/models/schema.sanity";
 import { Product as StripeProduct } from "use-shopping-cart/core";
-import { getAllVariantsFromProduct } from "../product";
-import sanityClient from "../sanity/sanityClient";
-import { productsQuery } from "../sanity/queries";
+import { Product as SanityProduct } from "~/models/schema.sanity";
 import stripe from ".";
+import { getAllVariantsFromProduct } from "../product";
+import { productsQuery } from "../sanity/queries";
+import sanityClient from "../sanity/sanityClient";
 import urlFor from "../sanity/urlFor";
-import Stripe from "stripe";
 
 /**
  * This helper will fetch all products from Sanity, and prices and products from Stripe.
