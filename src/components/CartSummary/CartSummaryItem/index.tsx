@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { BiTrash } from "react-icons/bi";
+import { BiMinus, BiPlus, BiTrash } from "react-icons/bi";
 import { formatCurrencyString } from "use-shopping-cart";
 import type { Product as CartProduct } from "use-shopping-cart/core";
 import { useShoppingCart } from "use-shopping-cart/react";
+import { TextButton } from "~/components/Button";
 import { priceConfig } from "~/lib/stripe/config";
+import { ProductCount } from "../ProductCount";
 
 interface Props {
   cartProduct: CartProduct;
@@ -37,8 +39,8 @@ export function CartSummaryItem(props: Props) {
         <p>{cartProduct.name}</p>
       </div>
 
-      <div style={{ gridArea: "amount" }}>
-        <p>{cartProduct.quantity} stk.</p>
+      <div style={{ gridArea: "amount" }} className="flex gap-2">
+        <ProductCount cartProduct={cartProduct} />
       </div>
 
       <div style={{ gridArea: "price" }} className="text-right">

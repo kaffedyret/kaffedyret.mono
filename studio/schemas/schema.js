@@ -6,6 +6,8 @@ import employee from "./employee";
 import localeBlockContent from "./locale/BlockContent";
 import localeString from "./locale/String";
 import localeText from "./locale/Text";
+import order from "./order";
+import orderStatus from "./orderStatus";
 import product from "./product";
 import productVariant from "./productVariant";
 import vendor from "./vendor";
@@ -19,6 +21,8 @@ export default createSchema({
     localeBlockContent,
     localeString,
     localeText,
+    order,
+    orderStatus,
     product,
     productVariant,
     vendor,
