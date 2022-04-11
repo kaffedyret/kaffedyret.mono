@@ -3,7 +3,7 @@ import { BiTrash } from "react-icons/bi";
 import Stripe from "stripe";
 import { formatCurrencyString } from "use-shopping-cart";
 import type { Product as CartProduct } from "use-shopping-cart/core";
-import { useShoppingCart } from "use-shopping-cart/react";
+import { useShoppingCart } from "use-shopping-cart";
 import { priceConfig } from "~/lib/stripe/config";
 
 interface Props {

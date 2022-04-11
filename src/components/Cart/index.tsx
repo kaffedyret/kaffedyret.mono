@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { CartProvider } from "use-shopping-cart/react";
+import { CartProvider } from "use-shopping-cart";
 
 interface Props {
   children: ReactNode;

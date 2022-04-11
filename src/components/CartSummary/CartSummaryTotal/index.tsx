@@ -1,4 +1,4 @@
-import { useShoppingCart } from "use-shopping-cart/react";
+import { useShoppingCart } from "use-shopping-cart";
 import { CartSummaryLine } from "../CartSummaryLine";
 
 export function CartSummaryTotal() {

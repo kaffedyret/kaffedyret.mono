@@ -2,7 +2,7 @@ import axios from "axios";
 import Link from "next/link";
 import { BiRightArrowAlt, BiTrash } from "react-icons/bi";
 import type { Product as CartProduct } from "use-shopping-cart/core";
-import { useShoppingCart } from "use-shopping-cart/react";
+import { useShoppingCart } from "use-shopping-cart";
 import { PrimaryButton, SecondaryButton } from "../Button";
 import { CartSummaryItem } from "./CartSummaryItem";
 import { CartSummaryTotal } from "./CartSummaryTotal";

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import type { Product as CartProduct } from "use-shopping-cart/core";
-import { useShoppingCart } from "use-shopping-cart/react";
+import { useShoppingCart } from "use-shopping-cart";
 import { TextButton } from "~/components/Button";
 
 interface Props {

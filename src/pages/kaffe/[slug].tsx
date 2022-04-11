@@ -11,7 +11,7 @@ import { useAlert } from "react-alert";
 import { BiPlus } from "react-icons/bi";
 import Stripe from "stripe";
 import { formatCurrencyString } from "use-shopping-cart";
-import { useShoppingCart } from "use-shopping-cart/react";
+import { useShoppingCart } from "use-shopping-cart";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { PrimaryButton } from "~/components/Button";

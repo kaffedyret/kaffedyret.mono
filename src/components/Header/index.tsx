@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useShoppingCart } from "use-shopping-cart/react";
+import { useShoppingCart } from "use-shopping-cart";
 import logo from "~/assets/images/kaffedyret_icon_rounded.svg";
 import { Kaffedyret } from "../Kaffedyret";
 import { MobileNav } from "./MobileNav";
