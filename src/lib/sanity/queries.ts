@@ -30,6 +30,10 @@ export const employeesQuery = `*[_type == "employee"] | order(order asc) {
   image,
 }`;
 
+export const ordersQuery = `*[_type == "order"] | order(order asc) {
+  _id,
+}`;
+
 export const orderStatusesQuery = `*[_type == "orderStatus"] | order(order asc) {
   _id,
   name,
