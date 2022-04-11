@@ -1,9 +1,8 @@
 import Image from "next/image";
-import { BiMinus, BiPlus, BiTrash } from "react-icons/bi";
+import { BiTrash } from "react-icons/bi";
 import { formatCurrencyString } from "use-shopping-cart";
 import type { Product as CartProduct } from "use-shopping-cart/core";
-import { useShoppingCart } from "use-shopping-cart";
-import { TextButton } from "~/components/Button";
+import { useShoppingCart } from "use-shopping-cart/react";
 import { priceConfig } from "~/lib/stripe/config";
 import { ProductCount } from "../ProductCount";
 
