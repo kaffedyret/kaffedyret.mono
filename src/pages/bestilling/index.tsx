@@ -7,7 +7,7 @@ import {
 import Head from "next/head";
 import { useEffect } from "react";
 import Stripe from "stripe";
-import { useShoppingCart } from "use-shopping-cart";
+import { useShoppingCart } from "use-shopping-cart/react";
 import { Breadcrumbs } from "~/components/Breadcrumbs";
 import { BreadcrumbItem } from "~/components/Breadcrumbs/BreadcrumbItem";
 import { OrderSummary } from "~/components/OrderSummary";

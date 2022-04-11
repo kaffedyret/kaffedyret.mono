@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import type { CartDetails } from "use-shopping-cart/core";
 import { validateCartItems } from "use-shopping-cart/utilities/serverless";
 import stripe from "~/lib/stripe";
 import { getAllInventory } from "~/lib/stripe/product";
 import { filterShippingRates } from "~/lib/stripe/shippingRate";
-import type { CartDetails, CartEntry } from "use-shopping-cart/core";
 
 /*
  * This function creates a Stripe Checkout session and returns the session ID
