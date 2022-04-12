@@ -36,7 +36,7 @@ export const ordersQuery = `*[_type == "order"] | order(order asc) {
   customerName,
   customerEmail,
   shipping,
-  status,
+  "status": *[_type=='orderStatus' && _id==^.status._ref][0]{ name },
   amountSubtotal,
   amountTotal,
   orderDatetime,
