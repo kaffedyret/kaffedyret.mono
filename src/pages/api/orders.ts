@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Order } from "~/models/schema.sanity";
 import sanity from "@sanity/client";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { config } from "~/lib/sanity/config";
 import { ordersQuery } from "~/lib/sanity/queries";
+import { Order } from "~/models/schema.sanity";
 
 /*
  * This function fetches all orders.
@@ -16,7 +16,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const sanityClient = sanity({
     ...config,
-    token: req.headers["authorization"] ?? "",
+    token:
+      (req.headers["authorization"] || process.env.SANITY_RETOOL_API_TOKEN) ??
+      "",
   });
 
   try {

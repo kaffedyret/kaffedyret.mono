@@ -31,7 +31,35 @@ export const employeesQuery = `*[_type == "employee"] | order(order asc) {
 }`;
 
 export const ordersQuery = `*[_type == "order"] | order(order asc) {
-  _id,
+  sessionId,
+  customerId,
+  customerName,
+  customerEmail,
+  shipping {
+    name,
+    shippingRate {
+      id,
+      displayName,
+    },
+    address {
+      line1,
+      line2,
+      postalCode,
+      city,
+      state,
+      country,
+    }
+  },
+  status,
+  amountSubtotal,
+  amountTotal,
+  orderDatetime,
+  lineItems {
+    description,
+    id,
+    amountTotal,
+    quantity,
+  }
 }`;
 
 export const orderStatusesQuery = `*[_type == "orderStatus"] | order(order asc) {
