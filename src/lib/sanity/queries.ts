@@ -35,31 +35,12 @@ export const ordersQuery = `*[_type == "order"] | order(order asc) {
   customerId,
   customerName,
   customerEmail,
-  shipping {
-    name,
-    shippingRate {
-      id,
-      displayName,
-    },
-    address {
-      line1,
-      line2,
-      postalCode,
-      city,
-      state,
-      country,
-    }
-  },
+  shipping,
   status,
   amountSubtotal,
   amountTotal,
   orderDatetime,
-  lineItems {
-    description,
-    id,
-    amountTotal,
-    quantity,
-  }
+  lineItems
 }`;
 
 export const orderStatusesQuery = `*[_type == "orderStatus"] | order(order asc) {
