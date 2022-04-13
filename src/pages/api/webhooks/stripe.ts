@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (event.type) {
     case "checkout.session.completed":
-      handleCheckoutSessionCompleted(event);
+      await handleCheckoutSessionCompleted(event);
       break;
     default:
       console.log(`Unhandled event type: ${event.type}`);
