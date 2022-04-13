@@ -9,7 +9,7 @@ export const productsQuery = `*[_type == "product"] | order(order asc) {
   blurb,
 }`;
 
-export const productQuery = `*[_type == "product" && slug.current == $slug] | order(order asc) {
+export const productQuery = `*[_type == "product" && slug.current == $slug][0] {
   _id,
   title,
   slug,
