@@ -1,7 +1,7 @@
 import sanity from "@sanity/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { config } from "~/lib/sanity/config";
-import { ordersQuery } from "~/lib/sanity/queries";
+import { orderStatusesQuery } from "~/lib/sanity/queries";
 import { Order } from "~/models/schema.sanity";
 
 /*
@@ -22,10 +22,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   try {
-    const orders = await sanityClient.fetch<Order>(ordersQuery);
-    return res.status(200).json(orders);
-  } catch (err) {
-    console.log("Error when fetching orders.", err);
-    return res.status(403).json({ message: "You do not have permissions." });
+    const ordersStatuses = await sanityClient.fetch<Order>(orderStatusesQuery);
+    return res.status(200).json(ordersStatuses);
+  } catch (error) {
+    console.log("Error when fetching order statuses.", error);
+    return res.status(500).json({
+      message: "Error when fetching order statuses.",
+      error,
+    });
   }
 };
