@@ -176,7 +176,7 @@ export const getServerSideProps = async ({
   GetServerSidePropsResult<Props>
 > => {
   const { slug } = params!;
-  const [product] = await sanityClient.fetch<Product[]>(productQuery, { slug });
+  const product = await sanityClient.fetch<Product>(productQuery, { slug });
 
   // TODO: Redirect if no products were found
 
