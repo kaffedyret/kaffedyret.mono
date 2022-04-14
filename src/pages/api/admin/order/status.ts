@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { config } from "~/lib/sanity/config";
 
 /*
- * This function updates the status of multiple orders.
+ * This function updates the status of an order.
  */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "PUT") {
@@ -12,9 +12,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .json({ message: `${req.method} method is not allowed.` });
   }
 
-  const orders: Array<{ orderId: string; statusId: string }> = req.body;
+  const order: { orderId: string; statusId: string } = req.body;
 
-  if (!orders || orders.length === 0) {
+  if (!order.orderId) {
     return res.status(400).json({ message: "Missing body." });
   }
 
@@ -26,16 +26,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   try {
-    const patchedOrders = await sanityClient.mutate(
-      orders.map((order) => ({
-        patch: {
-          id: order.orderId,
-          set: { status: { _ref: order.statusId } },
-        },
-      }))
-    );
-
-    return res.status(200).json(patchedOrders);
+    const patchedOrder = await sanityClient
+      .patch(order.orderId)
+      .set({ status: { _ref: order.statusId } });
+    return res.status(200).json(patchedOrder);
   } catch (error) {
     console.log("Error when fetching order statuses.", error);
     return res.status(500).json({
