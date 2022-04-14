@@ -12,9 +12,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .json({ message: `${req.method} method is not allowed.` });
   }
 
-  const orders: Array<{ orderId: string; statusId: string }> = req.body;
+  const { orderIds, statusId }: { orderIds: string[]; statusId: string } =
+    req.body;
 
-  if (!orders || orders.length === 0) {
+  if (!orderIds || orderIds.length === 0 || !statusId) {
     return res.status(400).json({ message: "Missing body." });
   }
 
@@ -27,10 +28,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const patchedOrders = await sanityClient.mutate(
-      orders.map((order) => ({
+      orderIds.map((orderId) => ({
         patch: {
-          id: order.orderId,
-          set: { status: { _ref: order.statusId } },
+          id: orderId,
+          set: { status: { _ref: statusId } },
         },
       }))
     );
