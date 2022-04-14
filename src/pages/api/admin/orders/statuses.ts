@@ -6,7 +6,7 @@ import { config } from "~/lib/sanity/config";
  * This function updates the status of multiple orders.
  */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "PUT") {
+  if (req.method !== "PATCH") {
     return res
       .status(400)
       .json({ message: `${req.method} method is not allowed.` });
