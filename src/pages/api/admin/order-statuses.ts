@@ -1,22 +1,17 @@
 import sanity from "@sanity/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { config } from "~/lib/sanity/config";
+import { orderStatusesQuery } from "~/lib/sanity/queries";
+import { Order } from "~/models/schema.sanity";
 
 /*
- * This function updates the status of multiple orders.
+ * This function fetches all order statuses.
  */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "PATCH") {
+  if (req.method !== "GET") {
     return res
       .status(400)
       .json({ message: `${req.method} method is not allowed.` });
-  }
-
-  const { orderIds, statusId }: { orderIds: string[]; statusId: string } =
-    req.body;
-
-  if (!orderIds || orderIds.length === 0 || !statusId) {
-    return res.status(400).json({ message: "Missing body." });
   }
 
   const sanityClient = sanity({
@@ -27,16 +22,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   try {
-    const patchedOrders = await sanityClient.mutate(
-      orderIds.map((orderId) => ({
-        patch: {
-          id: orderId,
-          set: { status: { _ref: statusId } },
-        },
-      }))
-    );
-
-    return res.status(200).json(patchedOrders);
+    const ordersStatuses = await sanityClient.fetch<Order>(orderStatusesQuery);
+    return res.status(200).json(ordersStatuses);
   } catch (error) {
     console.log("Error when fetching order statuses.", error);
     return res.status(500).json({

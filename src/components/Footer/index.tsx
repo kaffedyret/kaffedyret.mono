@@ -66,7 +66,7 @@ export function Footer() {
 
       <div className="bg-black text-white py-1">
         <div className="container py-2">
-          <p className="text-xs text-center">Kaffedyret 2022&copy;</p>
+          <p className="text-xs text-center">Kaffedyret 2022&trade;</p>
         </div>
       </div>
     </footer>
