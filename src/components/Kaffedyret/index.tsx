@@ -7,7 +7,7 @@ interface Props {
 export function Kaffedyret(props: Props) {
   return (
     <span className={classNames("font-jumble", props.className)}>
-      Kaffedyret
+      Kaffedyret&reg;
     </span>
   );
 }
