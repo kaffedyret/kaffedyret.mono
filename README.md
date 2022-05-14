@@ -1,12 +1,12 @@
-# Welcome to Kaffedyret
+# Welcome to Kaffedyret&reg;
 
 Hello there, curious soul.
 
-This is the source code for the website of Kaffedyret. The goal of having this repository public is to challenge myself to write easy-to-read, easy-to-understand, simple, and fast-paced code. A part of being a senior developer is understanding when to cut corners. In this project the aim is to spend as little time as possible developing so I have more to roast coffee.
+This is the source code for the website of Kaffedyret&reg;. The goal of having this repository public is to challenge myself to write easy-to-read, easy-to-understand, simple, and fast-paced code. A part of being a senior developer is understanding when to cut corners. In this project the aim is to spend as little time as possible developing so I have more to roast coffee.
 
-## What the heck is Kaffedyret?
+## What the heck is Kaffedyret&reg;?
 
-Kaffedyret is a nano coffee roastery based in Norway run by Christian and his wife Elisabeth. Christian is a senior frontend developer by day and coffee roaster by night. Oh, and Kaffedyret is Norwegian for "The Coffee Animal".
+Kaffedyret&reg; is a nano coffee roastery based in Norway run by Christian and his wife Elisabeth. Christian is a senior frontend developer by day and coffee roaster by night. Oh, and "kaffedyret" is Norwegian for "the coffee animal".
 
 ## Cool, so where can I buy coffee?
 
