@@ -18,5 +18,18 @@ module.exports = plugin(function ({ addComponents }) {
         maxWidth: "1024px",
       },
     },
+    ".container-extra-narrow": {
+      marginRight: "auto",
+      marginLeft: "auto",
+      maxWidth: "100%",
+      padding: "1rem",
+
+      "@screen sm": {
+        maxWidth: "640px",
+      },
+      "@screen md": {
+        maxWidth: "768px",
+      },
+    },
   });
 });
