@@ -34,7 +34,7 @@ export function Header() {
                   height={48}
                 />
 
-                <Kaffedyret className="hidden md:block text-3xl" />
+                <Kaffedyret withoutReg className="hidden md:block text-3xl" />
               </a>
             </Link>
           </div>
