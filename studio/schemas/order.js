@@ -1,3 +1,5 @@
+import React from "react";
+
 export default {
   name: "order",
   title: "Order",
@@ -132,7 +134,62 @@ export default {
   ],
   preview: {
     select: {
-      title: "customerName",
+      customerName: "customerName",
+      statusName: "status.name",
+      orderDatetime: "orderDatetime",
+    },
+    prepare({ customerName, statusName, orderDatetime }) {
+      const orderDate = new Date(orderDatetime);
+      let statusStyling = {};
+
+      switch (statusName) {
+        case "Ordered":
+          statusStyling = {
+            backgroundColor: "rgb(254, 226, 226)",
+            color: "#000",
+            fontSize: "2rem",
+            icon: "⏱",
+          };
+          break;
+        case "Fulfilled":
+          statusStyling = {
+            backgroundColor: "rgb(132 204 22)",
+            color: "#000",
+            fontSize: "1.5rem",
+            icon: "✓",
+          };
+          break;
+        default: {
+          statusStyling = {
+            backgroundColor: "rgb(59 130 246)",
+            color: "#fff",
+            fontSize: "1.5rem",
+            icon: "☕️",
+          };
+          break;
+        }
+      }
+
+      const { icon, ...styling } = statusStyling;
+
+      return {
+        title: `${customerName}`,
+        subtitle: `${orderDate.toLocaleDateString()}: ${statusName}`,
+        media: (
+          <span
+            style={{
+              ...styling,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {icon}
+          </span>
+        ),
+      };
     },
   },
 };
