@@ -21,5 +21,12 @@ module.exports = plugin(function ({ addComponents }) {
         gridTemplateColumns: "1fr auto auto",
       },
     },
+    ".grid-template-areas-admin": {
+      gridTemplateAreas: '"order-status pending" "order-status orders"',
+      gridTemplateColumns: "auto 1fr",
+      gridTemplateRows: "auto 1fr",
+
+      // TODO: Make available on mobile
+    },
   });
 });
