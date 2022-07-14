@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useOrderStatusTabs } from "~/features/admin/hooks/useOrderStatusTabs";
 import OrdersTable from "~/features/admin/OrdersTable";
 import OrderStatusTabs from "~/features/admin/OrderStatusTabs";
-import PendingRoasts from "~/features/admin/PendingRoasts";
+import PendingRoastsTable from "~/features/admin/PendingRoastsTable";
 import { ordersQuery, orderStatusesQuery } from "~/lib/sanity/queries";
 import sanityClient from "~/lib/sanity/sanityClient";
 import { Order } from "~/models/Order";
@@ -16,9 +16,10 @@ type Props = {
 
 const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
   const { activeTabId, handleTabClick } = useOrderStatusTabs(orderStatuses);
+  const ordersTableName = orderStatuses?.find((s) => s._id === activeTabId)?.name;
 
   return (
-    <div className="h-full">
+    <div className="h-full prose-lg">
       <Head>
         <title>Admin</title>
       </Head>
@@ -26,7 +27,7 @@ const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
       <main className="h-full grid grid-template-areas-admin">
         <section
           id="order-status"
-          className="bg-white flex flex-col pt-8"
+          className="bg-white flex flex-col pt-6 pl-3"
           style={{ gridArea: "order-status" }}
         >
           <OrderStatusTabs
@@ -39,13 +40,15 @@ const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
 
         <section
           id="pending-roasts"
-          className="p-4 border-b-2"
+          className="p-4 flex flex-col"
           style={{ gridArea: "pending" }}
         >
-          <PendingRoasts orders={orders} orderStatuses={orderStatuses} />
+          <h2>Pending roasts</h2>
+          <PendingRoastsTable orders={orders} orderStatuses={orderStatuses} />
         </section>
 
         <section id="orders" className="p-4" style={{ gridArea: "orders" }}>
+          <h2>{ordersTableName}</h2>
           <OrdersTable activeTabId={activeTabId} orders={orders} />
         </section>
       </main>

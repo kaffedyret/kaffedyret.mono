@@ -11,14 +11,27 @@ type Props = {
 export const VerticalTab = ({ badge, id, isActive, label, onClick }: Props) => (
   <button
     className={classNames(
-      "px-6 py-2 hover:bg-slate-200 text-left flex justify-between",
+      "px-6 py-2 text-left flex justify-between items-center rounded-tl rounded-bl",
       {
-        "bg-slate-300 hover:bg-slate-300": isActive
+        "hover:bg-slate-200": !isActive,
+        "bg-slate-900 text-white": isActive,
       }
-      )}
+    )}
     onClick={() => onClick(id)}
   >
     {label}
-    {badge && <span className="bg-blue-300 p-2 rounded-full flex items-center justify-center w-6 h-6 ml-4">{badge}</span>}
+    {badge && (
+      <span
+        className={classNames(
+          "p-2 rounded-full flex items-center justify-center w-6 h-6 ml-4 text-sm text-center",
+          {
+            "bg-slate-300": !isActive,
+            "bg-white text-slate-900": isActive,
+          }
+        )}
+      >
+        {badge}
+      </span>
+    )}
   </button>
 );

@@ -1,4 +1,5 @@
 import { formatCurrencyString } from "use-shopping-cart/core";
+import { Table, Td, Th, Tr } from "~/components/Table";
 import { Order } from "~/models/Order";
 import { useOrdersTable } from "./useOrdersTable";
 
@@ -11,17 +12,17 @@ const OrdersTable = ({ activeTabId, orders }: Props) => {
   const filteredOrders = useOrdersTable(activeTabId, orders);
 
   return filteredOrders && filteredOrders.length > 0 ? (
-    <table>
+    <Table className="w-full">
       <thead>
-        <tr>
-          <th>Tidspunkt</th>
-          <th>Kundenavn</th>
-          <th>E-post</th>
-          <th>Produkter</th>
-          <th>Shippingmetode</th>
-          <th>Adresse</th>
-          <th>Total</th>
-        </tr>
+        <Tr>
+          <Th>Tidspunkt</Th>
+          <Th>Kundenavn</Th>
+          <Th>E-post</Th>
+          <Th>Produkter</Th>
+          <Th>Shippingmetode</Th>
+          <Th>Adresse</Th>
+          <Th>Total</Th>
+        </Tr>
       </thead>
 
       <tbody>
@@ -29,49 +30,50 @@ const OrdersTable = ({ activeTabId, orders }: Props) => {
           const products = (
             <>
               {order.lineItems?.map((l) => (
-                <p
+                <span
+                  className="block"
                   key={`${order._id}-${l.id}`}
-                >{`${l.quantity}x ${l.description}`}</p>
+                >{`${l.quantity}x ${l.description}`}</span>
               ))}
             </>
           );
           const address = (
             <>
-              <p>
+              <span className="block">
                 {`${order.shipping.address?.line1}${
                   order.shipping.address?.line2
                     ? ` (${order.shipping.address.line2})`
                     : ""
                 }`}
-              </p>
-              <p>
+              </span>
+              <span className="block">
                 {`${order.shipping.address?.postalCode} ${order.shipping.address?.city} ${order.shipping.address?.country}`}
-              </p>
+              </span>
             </>
           );
           return (
-            <tr key={order._id}>
-              <td>
+            <Tr key={order._id}>
+              <Td>
                 {Intl.DateTimeFormat("nb-NO").format(
                   new Date(order.orderDatetime)
                 )}
-              </td>
-              <td>{order.customerName}</td>
-              <td>{order.customerEmail}</td>
-              <td>{products}</td>
-              <td>{order.shipping.shippingRate.displayName}</td>
-              <td>{address}</td>
-              <td>
+              </Td>
+              <Td>{order.customerName}</Td>
+              <Td>{order.customerEmail}</Td>
+              <Td>{products}</Td>
+              <Td>{order.shipping.shippingRate.displayName}</Td>
+              <Td>{address}</Td>
+              <Td>
                 {formatCurrencyString({
                   value: order.amountTotal,
                   currency: "NOK",
                 })}
-              </td>
-            </tr>
+              </Td>
+            </Tr>
           );
         })}
       </tbody>
-    </table>
+    </Table>
   ) : (
     <p>Her var det tomt, gitt</p>
   );
