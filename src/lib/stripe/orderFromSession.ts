@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { Order } from "~/models/Order";
+import { SessionOrder } from "~/models/Order";
 import { OrderStatus } from "~/models/schema.sanity";
 import stripe from ".";
 import { orderStatusesQuery } from "../sanity/queries";
@@ -7,7 +7,7 @@ import sanityClient from "../sanity/sanityClient";
 
 export const orderFromSession = async (
   session: Stripe.Checkout.Session
-): Promise<Order> => {
+): Promise<SessionOrder> => {
   const orderStatuses = await sanityClient.fetch<OrderStatus[]>(
     orderStatusesQuery
   );

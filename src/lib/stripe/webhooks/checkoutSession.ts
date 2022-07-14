@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import sanityClient from "~/lib/sanity/sanityClient";
-import { Order } from "~/models/Order";
+import { SessionOrder } from "~/models/Order";
 import stripe from "..";
 import { orderFromSession } from "../orderFromSession";
 
@@ -12,7 +12,7 @@ export const handleCheckoutSessionCompleted = async (event: Stripe.Event) => {
     });
 
     const order = await orderFromSession(session);
-    await sanityClient.createIfNotExists<Order>(order);
+    await sanityClient.createIfNotExists<SessionOrder>(order);
   } catch (err) {
     console.log(err);
   }

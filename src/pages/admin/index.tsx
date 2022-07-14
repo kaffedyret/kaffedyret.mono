@@ -1,11 +1,13 @@
 import type { GetServerSidePropsResult, NextPage } from "next";
 import Head from "next/head";
-import React, { useState } from "react";
-import { VerticalTab } from "~/components/VerticalTab";
-import sanityClient from "~/lib/sanity/sanityClient";
-import { ordersQuery, orderStatusesQuery } from "~/lib/sanity/queries";
-import { Order, OrderStatus } from "~/models/schema.sanity";
 import { formatCurrencyString } from "use-shopping-cart/core";
+import OrderStatusTabs from "~/features/admin/OrderStatusTabs";
+import PendingRoasts from "~/features/admin/PendingRoasts";
+import { useOrderStatusTabs } from "~/features/hooks/useOrderStatusTabs";
+import { ordersQuery, orderStatusesQuery } from "~/lib/sanity/queries";
+import sanityClient from "~/lib/sanity/sanityClient";
+import { Order } from "~/models/Order";
+import { OrderStatus } from "~/models/schema.sanity";
 
 type Props = {
   orderStatuses?: OrderStatus[];
@@ -13,37 +15,11 @@ type Props = {
 };
 
 const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
-  const [activeTab, setActiveTab] = useState<string | null>(
-    orderStatuses ? orderStatuses[0].name : null
-  );
+  const { activeTab, handleTabClick } = useOrderStatusTabs(orderStatuses);
+
   const filteredOrders = orders?.filter(
     (order) => order.status.name === activeTab
   );
-  const pendingRoasts: Array<{ name: string; quantity: number }> | null =
-    orders && orderStatuses
-      ? Object.values(
-          orders
-            .filter((o) => o.status.name === orderStatuses[0].name)
-            .map((o) => o.lineItems)
-            .flat()
-            .reduce(
-              (total, o) => ({
-                ...total,
-                [o.description]: {
-                  name: o.description,
-                  quantity: total[o.description]
-                    ? (total[o.description].quantity += o.quantity)
-                    : o.quantity,
-                },
-              }),
-              {}
-            )
-        )
-      : null;
-
-  const handleTabClick = (label: string) => {
-    setActiveTab(label);
-  };
 
   return (
     <div className="h-full">
@@ -57,22 +33,12 @@ const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
           className="bg-white flex flex-col pt-8"
           style={{ gridArea: "order-status" }}
         >
-          {orderStatuses ? (
-            orderStatuses.map((orderStatus) => (
-              <VerticalTab
-                badge={
-                  orders?.filter((o) => o.status.name === orderStatus.name)
-                    .length || null
-                }
-                isActive={activeTab == orderStatus._id}
-                label={orderStatus.name}
-                onClick={handleTabClick}
-                key={orderStatus._id}
-              />
-            ))
-          ) : (
-            <p>Her var det tomt, gitt</p>
-          )}
+          <OrderStatusTabs
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+            orderStatuses={orderStatuses}
+            orders={orders}
+          />
         </section>
 
         <section
@@ -80,29 +46,7 @@ const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
           className="p-4 border-b-2"
           style={{ gridArea: "pending" }}
         >
-          {pendingRoasts && pendingRoasts.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Navn</th>
-                  <th>Antall</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {pendingRoasts?.map((r) => {
-                  return (
-                    <tr key={r.name}>
-                      <td>{r.name}</td>
-                      <td>{r.quantity}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          ) : (
-            <p>Ingen ventende bestillinger</p>
-          )}
+          <PendingRoasts orders={orders} orderStatuses={orderStatuses} />
         </section>
 
         <section id="orders" className="p-4" style={{ gridArea: "orders" }}>
