@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Provider as AlertProvider } from "react-alert";
 import {
   alertOptions,
@@ -9,9 +10,14 @@ import {
 import { Cart } from "~/components/Cart";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
+import { AdminFooter } from "~/features/admin/AdminFooter";
+import { AdminHeader } from "~/features/admin/AdminHeader";
+import { isInAdminPath } from "~/lib/admin";
 import "../styles/styles.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter();
+
   return (
     <AlertProvider
       containerStyle={containerStyle}
@@ -25,13 +31,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
 
         <div className="grid grid-rows-app min-h-screen">
-          <Header />
+          {isInAdminPath(pathname) ? <AdminHeader /> : <Header />}
 
           <section className="bg-slate-100">
             <Component {...pageProps} />
           </section>
 
-          <Footer />
+          {isInAdminPath(pathname) ? <AdminFooter /> : <Footer />}
         </div>
       </Cart>
     </AlertProvider>
