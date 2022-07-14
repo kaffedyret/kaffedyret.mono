@@ -1,7 +1,9 @@
+import createClient from "@sanity/client";
 import { config } from "./config";
-import sanityClient from "@sanity/client";
 
-export default sanityClient({
+const sanityClient = createClient({
   ...config,
   token: process.env.SANITY_API_TOKEN ?? ``,
 });
+
+export default sanityClient;

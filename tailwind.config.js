@@ -10,6 +10,9 @@ module.exports = {
       padding: "1rem",
     },
     extend: {
+      animation: {
+        "spin-slow": "spin 2s linear infinite",
+      },
       gridTemplateColumns: {
         header: "auto 1fr auto",
         "radio-button": "auto 1fr",

@@ -1,9 +1,10 @@
 import type { GetServerSidePropsResult, NextPage } from "next";
-import Head from "next/head";
-import { useOrderStatusTabs } from "~/features/admin/hooks/useOrderStatusTabs";
-import OrdersTable from "~/features/admin/OrdersTable";
-import OrderStatusTabs from "~/features/admin/OrderStatusTabs";
-import PendingRoastsTable from "~/features/admin/PendingRoastsTable";
+import { signOut, useSession } from "next-auth/react";
+import { DangerButton } from "~/components/Button";
+import Loading from "~/components/Loading";
+import AdminDashboard from "~/features/admin/AdminDashboard";
+import Login from "~/features/admin/Login";
+import Signup from "~/features/admin/Signup";
 import { ordersQuery, orderStatusesQuery } from "~/lib/sanity/queries";
 import sanityClient from "~/lib/sanity/sanityClient";
 import { Order } from "~/models/Order";
@@ -15,45 +16,33 @@ type Props = {
 };
 
 const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
-  const { activeTabId, handleTabClick } = useOrderStatusTabs(orderStatuses);
-  const ordersTableName = orderStatuses?.find((s) => s._id === activeTabId)?.name;
+  const { data, status } = useSession();
 
-  return (
-    <div className="h-full prose-lg">
-      <Head>
-        <title>Admin</title>
-      </Head>
-
-      <main className="h-full grid grid-template-areas-admin">
-        <section
-          id="order-status"
-          className="bg-white flex flex-col pt-6 pl-3"
-          style={{ gridArea: "order-status" }}
-        >
-          <OrderStatusTabs
-            activeTabId={activeTabId}
-            handleTabClick={handleTabClick}
-            orderStatuses={orderStatuses}
-            orders={orders}
-          />
-        </section>
-
-        <section
-          id="pending-roasts"
-          className="p-4 flex flex-col"
-          style={{ gridArea: "pending" }}
-        >
-          <h2>Pending roasts</h2>
-          <PendingRoastsTable orders={orders} orderStatuses={orderStatuses} />
-        </section>
-
-        <section id="orders" className="p-4" style={{ gridArea: "orders" }}>
-          <h2>{ordersTableName}</h2>
-          <OrdersTable activeTabId={activeTabId} orders={orders} />
-        </section>
+  if (data) {
+    return <AdminDashboard orderStatuses={orderStatuses} orders={orders} />;
+  } else if (status === "loading") {
+    return (
+      <main className="flex flex-col w-full h-full justify-center items-center">
+        <Loading label="Henter brukerinformasjon..." />
       </main>
-    </div>
-  );
+    );
+  } else if (status === "unauthenticated") {
+    return (
+      <main className="flex flex-col gap-4 w-full h-full justify-center items-center">
+        <div className="flex gap-32 prose">
+          <Login />
+          <Signup />
+        </div>
+      </main>
+    );
+  } else {
+    return (
+      <main className="flex flex-col gap-4 w-full h-full justify-center items-center">
+        <p>En uventet feil skjedde. Logg ut og prøv på nytt.</p>
+        <DangerButton onClick={() => signOut()}>Logg ut</DangerButton>
+      </main>
+    );
+  }
 };
 
 export const getServerSideProps = async ({}): Promise<

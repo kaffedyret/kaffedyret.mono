@@ -37,6 +37,64 @@ export type {
 };
 
 /**
+ * Account
+ *
+ *
+ */
+export interface Account extends SanityDocument {
+  _type: "account";
+
+  /**
+   * providerType — `string`
+   *
+   *
+   */
+  providerType?: string;
+
+  /**
+   * providerId — `string`
+   *
+   *
+   */
+  providerId?: string;
+
+  /**
+   * providerAccountId — `string`
+   *
+   *
+   */
+  providerAccountId?: string;
+
+  /**
+   * refreshToken — `string`
+   *
+   *
+   */
+  refreshToken?: string;
+
+  /**
+   * accessToken — `string`
+   *
+   *
+   */
+  accessToken?: string;
+
+  /**
+   * accessTokenExpires — `string`
+   *
+   *
+   */
+  accessTokenExpires?: string;
+
+  /**
+   * User — `reference`
+   *
+   *
+   */
+  user?: SanityReference<User>;
+}
+
+/**
  * Category
  *
  *
@@ -435,6 +493,50 @@ export interface Product extends SanityDocument {
 }
 
 /**
+ * User
+ *
+ *
+ */
+export interface User extends SanityDocument {
+  _type: "user";
+
+  /**
+   * Admin — `boolean`
+   *
+   *
+   */
+  admin?: boolean;
+
+  /**
+   * Navn — `string`
+   *
+   *
+   */
+  name?: string;
+
+  /**
+   * E-post — `string`
+   *
+   *
+   */
+  email?: string;
+
+  /**
+   * Bilde — `url`
+   *
+   *
+   */
+  image?: string;
+
+  /**
+   * Passord — `string`
+   *
+   *
+   */
+  password?: string;
+}
+
+/**
  * Vendor
  *
  *
@@ -474,6 +576,36 @@ export interface Vendor extends SanityDocument {
    *
    */
   description?: BlockContent;
+}
+
+/**
+ * Verification Token
+ *
+ *
+ */
+export interface VerificationToken extends SanityDocument {
+  _type: "verification-token";
+
+  /**
+   * Identifier — `string`
+   *
+   *
+   */
+  identifier?: string;
+
+  /**
+   * Token — `string`
+   *
+   *
+   */
+  token?: string;
+
+  /**
+   * Expires — `date`
+   *
+   *
+   */
+  expires?: string;
 }
 
 export type BlockContent = Array<
@@ -581,9 +713,12 @@ export type ProductVariant = {
 };
 
 export type Documents =
+  | Account
   | Category
   | Employee
   | Order
   | OrderStatus
   | Product
-  | Vendor;
+  | User
+  | Vendor
+  | VerificationToken;

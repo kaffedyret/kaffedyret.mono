@@ -1,3 +1,4 @@
+import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -19,28 +20,33 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
 
   return (
-    <AlertProvider
-      containerStyle={containerStyle}
-      template={AlertTemplate}
-      {...alertOptions}
-    >
-      <Cart>
-        <Head>
-          <title>Kaffedyret</title>
-          <meta name="viewport" content="width=device-width,initial-scale=1" />
-        </Head>
+    <SessionProvider session={pageProps.session}>
+      <AlertProvider
+        containerStyle={containerStyle}
+        template={AlertTemplate}
+        {...alertOptions}
+      >
+        <Cart>
+          <Head>
+            <title>Kaffedyret</title>
+            <meta
+              name="viewport"
+              content="width=device-width,initial-scale=1"
+            />
+          </Head>
 
-        <div className="grid grid-rows-app min-h-screen">
-          {isInAdminPath(pathname) ? <AdminHeader /> : <Header />}
+          <div className="grid grid-rows-app min-h-screen">
+            {isInAdminPath(pathname) ? <AdminHeader /> : <Header />}
 
-          <section className="bg-slate-100">
-            <Component {...pageProps} />
-          </section>
+            <section className="bg-slate-100">
+              <Component {...pageProps} />
+            </section>
 
-          {isInAdminPath(pathname) ? <AdminFooter /> : <Footer />}
-        </div>
-      </Cart>
-    </AlertProvider>
+            {isInAdminPath(pathname) ? <AdminFooter /> : <Footer />}
+          </div>
+        </Cart>
+      </AlertProvider>
+    </SessionProvider>
   );
 }
 
