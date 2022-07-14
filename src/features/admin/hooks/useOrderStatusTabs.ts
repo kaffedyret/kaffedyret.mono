@@ -2,13 +2,13 @@ import { useState } from "react";
 import { OrderStatus } from "~/models/schema.sanity";
 
 export const useOrderStatusTabs = (orderStatuses?: OrderStatus[]) => {
-  const [activeTab, setActiveTab] = useState<string | null>(
+  const [activeTabId, setActiveTabId] = useState<string | null>(
     orderStatuses ? orderStatuses[0].name : null
   );
 
-  const handleTabClick = (label: string) => {
-    setActiveTab(label);
+  const handleTabClick = (id: string) => {
+    setActiveTabId(id);
   };
 
-  return { activeTab, handleTabClick };
+  return { activeTabId, handleTabClick };
 };

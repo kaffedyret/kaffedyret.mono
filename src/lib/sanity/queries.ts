@@ -31,6 +31,7 @@ export const employeesQuery = `*[_type == "employee"] | order(order asc) {
 }`;
 
 export const ordersQuery = `*[_type == "order"] | order(orderDatetime desc) {
+  _id,
   sessionId,
   customerId,
   customerName,
