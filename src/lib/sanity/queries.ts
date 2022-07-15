@@ -51,3 +51,11 @@ export const orderStatusesQuery = `*[_type == "orderStatus"] | order(order asc) 
   _id,
   name,
 }`;
+
+export const userQuery = `*[_type == "user" && email == $email][0] {
+  _id,
+  admin,
+  name,
+  email,
+  image,
+}`;

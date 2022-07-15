@@ -20,7 +20,7 @@ const Signup = () => {
     });
 
     await signIn("sanity-login", {
-      redirect: false,
+      redirect: true,
       email,
       password,
     });

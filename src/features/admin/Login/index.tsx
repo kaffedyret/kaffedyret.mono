@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
 
     await signIn("sanity-login", {
-      redirect: false,
+      redirect: true,
       email,
       password,
     });
@@ -45,14 +45,6 @@ const Login = () => {
           type="submit"
         >
           Logg inn
-        </PrimaryButton>
-
-        <PrimaryButton
-          className="self-start"
-          disabled={isLoading}
-          onClick={() => signIn("github")}
-        >
-          Logg inn med GitHub
         </PrimaryButton>
       </form>
     </div>
