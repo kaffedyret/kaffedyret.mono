@@ -27,7 +27,8 @@ export function CartSummary() {
         redirectToCheckout({ sessionId });
       })
       .catch((err) => {
-        throw new Error("Could not go to checkout.", { cause: err as Error});
+        console.log(err)
+        throw new Error("Could not go to checkout.");
       });
   };
 

@@ -20,8 +20,7 @@ export const updateOrderStatus = async (
 
     return patchedOrders;
   } catch (error) {
-    throw new Error("Error updating order statuses.", {
-      cause: error as Error,
-    });
+    console.log(error);
+    throw new Error("Error updating order statuses.");
   }
 };

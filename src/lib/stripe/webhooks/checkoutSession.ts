@@ -14,6 +14,7 @@ export const handleCheckoutSessionCompleted = async (event: Stripe.Event) => {
     const order = await orderFromSession(session);
     await sanityClient.createIfNotExists<SessionOrder>(order);
   } catch (err) {
-    throw new Error("Could not handle checkout session completed.", { cause: err as Error });
+    console.log(err);
+    throw new Error("Could not handle checkout session completed.");
   }
 };
