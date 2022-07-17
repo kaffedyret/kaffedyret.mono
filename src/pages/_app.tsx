@@ -13,7 +13,7 @@ import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
 import { AdminFooter } from "~/features/admin/AdminFooter";
 import { AdminHeader } from "~/features/admin/AdminHeader";
-import { isInAdminPath } from "~/lib/admin";
+import { isInAdminPath } from "~/lib/admin/admin.utils";
 import "../styles/styles.css";
 
 function MyApp({ Component, pageProps }: AppProps) {

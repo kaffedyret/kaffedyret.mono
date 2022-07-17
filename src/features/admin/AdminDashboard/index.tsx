@@ -48,7 +48,11 @@ const AdminDashboard = ({ orderStatuses, orders }: Props) => {
 
         <section id="orders" className="p-4" style={{ gridArea: "orders" }}>
           <h2>{ordersTableName}</h2>
-          <OrdersTable activeTabId={activeTabId} orders={orders} />
+          <OrdersTable
+            activeTabId={activeTabId}
+            orders={orders}
+            orderStatuses={orderStatuses}
+          />
         </section>
       </main>
     </div>
