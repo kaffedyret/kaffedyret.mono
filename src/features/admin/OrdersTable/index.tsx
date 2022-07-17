@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { formatCurrencyString } from "use-shopping-cart/core";
 import { PrimaryButton } from "~/components/Button";
 import { Option, Select } from "~/components/Select";
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const OrdersTable = ({ activeTabId, orders, orderStatuses }: Props) => {
+  const [isLoading, setLoading] = useState<boolean>(false);
   const { filteredOrders, selectedRows, toggleRow } = useOrdersTable(
     activeTabId,
     orders
@@ -25,7 +27,11 @@ const OrdersTable = ({ activeTabId, orders, orderStatuses }: Props) => {
 
   const handleMoveClick = async () => {
     if (selectedRows.length && !!selectedStatusId) {
-      updateOrderStatus(selectedRows, selectedStatusId);
+      setLoading(true);
+      await updateOrderStatus(selectedRows, selectedStatusId);
+      setLoading(false);
+      // Lord, forgive me for I am too weak to introduce global fetch mechanisms like SWR
+      location.reload();
     }
   };
 
@@ -120,9 +126,14 @@ const OrdersTable = ({ activeTabId, orders, orderStatuses }: Props) => {
 
         <PrimaryButton
           disabled={selectedRows.length == 0}
+          isLoading={isLoading}
+          loadingText={`Flytter ${selectedRows.length} bestilling${
+            selectedRows.length !== 1 ? "er" : ""
+          }...`}
           onClick={handleMoveClick}
         >
-          Flytt {selectedRows.length} bestillinger
+          Flytt {selectedRows.length} bestilling
+          {selectedRows.length !== 1 ? "er" : ""}
         </PrimaryButton>
       </div>
     </div>

@@ -6,6 +6,8 @@ export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;
   isLarge?: boolean;
+  isLoading?: boolean;
+  loadingText?: string;
 }
 
 export function BaseButton(props: Props): JSX.Element {
@@ -16,8 +18,12 @@ export function BaseButton(props: Props): JSX.Element {
     iconLeft,
     iconRight,
     isLarge,
+    isLoading,
+    loadingText,
     ...rest
   } = props;
+
+  const showAsDisabled = disabled || isLoading;
 
   return (
     <button
@@ -27,15 +33,16 @@ export function BaseButton(props: Props): JSX.Element {
           "px-6 py-3 text-md": !isLarge,
           "px-8 py-4 text-xl": isLarge,
           "drop-shadow-sm hover:drop-shadow-lg transition-all ease-in-out duration-200":
-            !disabled,
-          "bg-neutral-300 cursor-default": disabled,
+            !showAsDisabled,
+          "bg-neutral-300 cursor-default": showAsDisabled,
         },
         className
       )}
+      disabled={showAsDisabled}
       {...rest}
     >
       {iconLeft}
-      {children}
+      {(isLoading && loadingText) || children}
       {iconRight}
     </button>
   );

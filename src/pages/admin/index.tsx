@@ -1,6 +1,7 @@
 import type {
-  GetServerSidePropsContext, GetServerSidePropsResult,
-  NextPage
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  NextPage,
 } from "next";
 import { unstable_getServerSession } from "next-auth/next";
 import { signOut, useSession } from "next-auth/react";
@@ -11,7 +12,7 @@ import Login from "~/features/admin/Login";
 import {
   ordersQuery,
   orderStatusesQuery,
-  userQuery
+  userQuery,
 } from "~/lib/sanity/queries";
 import sanityClient from "~/lib/sanity/sanityClient";
 import { Order } from "~/models/Order";

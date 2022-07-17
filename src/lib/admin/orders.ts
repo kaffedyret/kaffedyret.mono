@@ -1,6 +1,5 @@
 import { SanityDocument } from "@sanity/client";
 import { Order } from "~/models/schema.sanity";
-import sanityClient from "../sanity/sanityClient";
 
 /*
  * This function updates the status of multiple orders.
@@ -10,16 +9,14 @@ export const updateOrderStatus = async (
   statusId: string
 ): Promise<SanityDocument<Order>> => {
   try {
-    // TODO: This doesn't work because sanityClient uses an environment variable
-    // only accessible by server. And we don't want to expose it to the client.
-    const patchedOrders = await sanityClient.mutate<Order>(
-      orderIds.map((orderId) => ({
-        patch: {
-          id: orderId,
-          set: { status: { _ref: statusId } },
-        },
-      }))
-    );
+    const body = new URLSearchParams();
+    body.append("statusId", statusId);
+    body.append("orderIds", JSON.stringify(orderIds));
+
+    const patchedOrders = await fetch("/api/admin/orders/statuses", {
+      method: "PATCH",
+      body,
+    }).then((res) => res.json());
 
     return patchedOrders;
   } catch (error) {
