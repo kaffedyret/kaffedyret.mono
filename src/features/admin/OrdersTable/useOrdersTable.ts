@@ -7,6 +7,10 @@ export const useOrdersTable = (
 ) => {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
+  const resetSelectedRows = () => {
+    setSelectedRows([]);
+  };
+
   const handleToggleRow = (id: string): void => {
     setSelectedRows((state) =>
       state.includes(id)
@@ -24,5 +28,6 @@ export const useOrdersTable = (
     filteredOrders,
     selectedRows,
     toggleRow: handleToggleRow,
+    resetSelectedRows,
   };
 };

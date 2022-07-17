@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatCurrencyString } from "use-shopping-cart/core";
 import { PrimaryButton } from "~/components/Button";
 import { Option, Select } from "~/components/Select";
@@ -17,13 +17,15 @@ type Props = {
 
 const OrdersTable = ({ activeTabId, orders, orderStatuses }: Props) => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const { filteredOrders, selectedRows, toggleRow } = useOrdersTable(
-    activeTabId,
-    orders
-  );
+  const { filteredOrders, selectedRows, toggleRow, resetSelectedRows } =
+    useOrdersTable(activeTabId, orders);
   const [selectedStatusId, onSelectedStatusIdChange] = useSelectState(
     orderStatuses && orderStatuses.length > 1 ? orderStatuses[1]._id : undefined
   );
+
+  useEffect(() => {
+    resetSelectedRows();
+  }, [activeTabId]);
 
   const handleMoveClick = async () => {
     if (selectedRows.length && !!selectedStatusId) {
