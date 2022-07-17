@@ -22,7 +22,7 @@ export function BaseButton(props: Props): JSX.Element {
   return (
     <button
       className={classNames(
-        "flex items-center gap-2 rounded-full text-white tracking-wide no-underline leading-none",
+        "flex items-center gap-3 rounded-full text-white tracking-wide no-underline leading-none",
         {
           "px-6 py-3 text-md": !isLarge,
           "px-8 py-4 text-xl": isLarge,

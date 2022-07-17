@@ -1,7 +1,6 @@
 import type {
-  GetServerSidePropsResult,
-  NextPage,
-  GetServerSidePropsContext,
+  GetServerSidePropsContext, GetServerSidePropsResult,
+  NextPage
 } from "next";
 import { unstable_getServerSession } from "next-auth/next";
 import { signOut, useSession } from "next-auth/react";
@@ -9,11 +8,10 @@ import { DangerButton } from "~/components/Button";
 import Loading from "~/components/Loading";
 import AdminDashboard from "~/features/admin/AdminDashboard";
 import Login from "~/features/admin/Login";
-import Signup from "~/features/admin/Signup";
 import {
   ordersQuery,
   orderStatusesQuery,
-  userQuery,
+  userQuery
 } from "~/lib/sanity/queries";
 import sanityClient from "~/lib/sanity/sanityClient";
 import { Order } from "~/models/Order";
@@ -51,11 +49,8 @@ const AdminPage: NextPage = ({ orderStatuses, orders }: Props) => {
     );
   } else if (status === "unauthenticated") {
     return (
-      <main className="flex flex-col gap-4 w-full h-full justify-center items-center">
-        <div className="flex gap-32 prose">
-          <Login />
-          <Signup />
-        </div>
+      <main className="flex w-full h-full justify-center items-center">
+        <Login />
       </main>
     );
   } else {
