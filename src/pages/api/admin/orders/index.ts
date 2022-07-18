@@ -1,7 +1,6 @@
-import sanity from "@sanity/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { config } from "~/lib/sanity/config";
 import { ordersQuery } from "~/lib/sanity/queries";
+import sanityClient from "~/lib/sanity/sanityClient";
 import { Order } from "~/models/schema.sanity";
 
 /*
@@ -13,13 +12,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .status(400)
       .json({ message: `${req.method} method is not allowed.` });
   }
-
-  const sanityClient = sanity({
-    ...config,
-    token:
-      (req.headers["authorization"] || process.env.SANITY_RETOOL_API_TOKEN) ??
-      "",
-  });
 
   try {
     const orders = await sanityClient.fetch<Order>(ordersQuery);

@@ -30,10 +30,16 @@ const OrdersTable = ({ activeTabId, orders, orderStatuses }: Props) => {
   const handleMoveClick = async () => {
     if (selectedRows.length && !!selectedStatusId) {
       setLoading(true);
-      await updateOrderStatus(selectedRows, selectedStatusId);
+      const patchedOrders = await updateOrderStatus(
+        selectedRows,
+        selectedStatusId
+      );
       setLoading(false);
+
       // Lord, forgive me for I am too weak to introduce global fetch mechanisms like SWR
-      location.reload();
+      if (patchedOrders) {
+        location.reload();
+      }
     }
   };
 
