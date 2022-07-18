@@ -1,5 +1,5 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
-import { SanityAdapter, SanityCredentials } from "next-auth-sanity";
+import { SanityAdapter } from "next-auth-sanity";
 import GoogleProvider from "next-auth/providers/google";
 import sanityClient from "~/lib/sanity/sanityClient";
 
@@ -20,7 +20,6 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.AUTH_SECRET || "AUTH_SECRET",
   // @ts-ignore
   adapter: SanityAdapter(sanityClient),
   callbacks: {
@@ -36,6 +35,11 @@ export const authOptions: NextAuthOptions = {
       session.accessToken = token.accessToken;
       return session;
     },
+  },
+  theme: {
+    brandColor: "#3b82f6",
+    colorScheme: "light",
+    logo: "/kaffedyret_icon_rounded.svg",
   },
 };
 
