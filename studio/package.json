@@ -9,6 +9,7 @@
   "scripts": {
     "start": "sanity start",
     "build": "sanity build",
+    "login": "sanity login",
     "deploy": "sanity deploy"
   },
   "keywords": [

@@ -79,7 +79,7 @@ const OrderPage: NextPage<
 };
 
 type PageQueries = {
-  session_id: string;
+  session_id?: string;
 };
 
 export const getServerSideProps = async ({
@@ -88,6 +88,10 @@ export const getServerSideProps = async ({
   GetServerSidePropsResult<Props>
 > => {
   const { session_id } = query;
+  if (!session_id) {
+    return { redirect: { destination: "/feil", permanent: false } };
+  }
+
   const session = await stripe.checkout.sessions.retrieve(session_id as string);
 
   if (typeof session.customer !== "string") {
